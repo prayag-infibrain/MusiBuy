@@ -1,0 +1,325 @@
+﻿@using MusiBuy.Common.Enumeration
+@model MusiBuy.Common.Models.PostManagementViewModel
+@{
+	ViewData["Title"] = "Post Detail";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+	string mimeType = "";
+	if (!string.IsNullOrEmpty(Model.StrMediaFile))
+	{
+		string extension = System.IO.Path.GetExtension(Model.StrMediaFile).ToLower();
+		if (Model.MediaTypeId == (int)PostMediaTypeEnum.Audio)
+		{
+			mimeType = "audio/mpeg"; // default
+			switch (extension)
+			{
+				case ".wav": mimeType = "audio/wav"; break;
+				case ".aiff": mimeType = "audio/aiff"; break;
+				case ".flac": mimeType = "audio/flac"; break;
+				case ".aac": mimeType = "audio/aac"; break;
+				case ".wma": mimeType = "audio/x-ms-wma"; break;
+				case ".m4a": mimeType = "audio/mp4"; break;
+				case ".mp3": mimeType = "audio/mpeg"; break;
+				default: mimeType = "audio/*"; break;
+			}
+		}
+		else if (Model.MediaTypeId == (int)PostMediaTypeEnum.Audio)
+		{
+			mimeType = "video/mp4"; // default fallback
+			switch (extension)
+			{
+				case ".webm": mimeType = "video/webm"; break;
+				case ".ogg": mimeType = "video/ogg"; break;
+				case ".mov": mimeType = "video/quicktime"; break;
+				case ".avi": mimeType = "video/x-msvideo"; break;
+				case ".wmv": mimeType = "video/x-ms-wmv"; break;
+				case ".mkv": mimeType = "video/x-matroska"; break;
+				case ".mp4": mimeType = "video/mp4"; break;
+			}
+		}
+	}
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="toolbar" id="kt_toolbar">
+	<div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+		<div class="breadcrumb-header justify-content-between">
+			<div class="left-content">
+				<h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+					Post Detail
+					<small class="text-muted fs-6 fw-normal ms-1"></small>
+				</h1>
+				<partial name="_BreadCrumb" />
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card">
+	<div class="card-body">
+		<form class="form-horizontal formstyle">
+
+			<div class="row pt-1">
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-2">Creator :</label>
+						<div class="col-sm-12 col-lg-10">
+							
+							@Html.DisplayFor(model => model.CreatorName) (@Html.DisplayFor(model => model.CreatorType))
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-2">Type :</label>
+						<div class="col-sm-12 col-lg-10">
+							@Html.DisplayFor(model => model.MediaTypeName)
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row pt-1">
+				<div class="col-sm-12 col-lg-12">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-1">Title :</label>
+						<div class="col-sm-12 col-lg-11">
+							@Html.DisplayFor(model => model.Title)
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row pt-1">
+				<div class="col-sm-12 col-lg-12">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-1">Description :</label>
+						<div class="col-sm-12 col-lg-11">
+							@Html.Raw(Model.Description?.Replace("\r\n", "<br />").Replace("\n", "<br />"))
+							@* @Html.DisplayFor(model => model.Description) *@
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row pt-1">
+				<div class="col-sm-12 col-lg-12">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-1">Tag :</label>
+						<div class="col-sm-12 col-lg-11">
+							@if (!string.IsNullOrWhiteSpace(Model.Tags))
+							{
+								foreach (var tag in Model.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries))
+								{
+									<span class="badge bg-secondary text-dark me-1 mb-1">
+										#@tag.Trim()
+									</span>
+								}
+							}
+							else
+							{
+								<span class="text-muted">No tags</span>
+							}
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			@if (!string.IsNullOrEmpty(Model.Url))
+			{
+				<div class="row pt-1">
+					<div class="col-sm-12 col-lg-12">
+						<div class="row">
+							<label for="inputEmail3" class="col-sm-12 col-lg-1">URL :</label>
+							<div class="col-sm-12 col-lg-11">
+								<a href="@Model.Url" target="_blank">@Model.Title</a>
+								@* @Html.DisplayFor(model => model.Url) *@
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+			@if (!string.IsNullOrEmpty(Model.ContentTypeName))
+			{
+				<div class="row pt-1">
+					<div class="col-sm-12 col-lg-12">
+						<div class="row">
+							<label for="inputEmail3" class="col-sm-12 col-lg-1">Content Type :</label>
+							<div class="col-sm-12 col-lg-11">
+								@Html.DisplayFor(model => model.ContentTypeName)
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(Model.CountryName))
+			{
+				<div class="row pt-1">
+					<div class="col-sm-12 col-lg-12">
+						<div class="row">
+							<label for="inputEmail3" class="col-sm-12 col-lg-1">Country :</label>
+							<div class="col-sm-12 col-lg-11">
+								@Html.DisplayFor(model => model.CountryName)
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(Model.GenreName))
+			{
+				<div class="row pt-1">
+					<div class="col-sm-12 col-lg-12">
+						<div class="row">
+							<label for="inputEmail3" class="col-sm-12 col-lg-1">Genre :</label>
+							<div class="col-sm-12 col-lg-11">
+								@Html.DisplayFor(model => model.GenreName)
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(Model.CategoryName))
+			{
+				<div class="row pt-1">
+					<div class="col-sm-12 col-lg-12">
+						<div class="row">
+							<label for="inputEmail3" class="col-sm-12 col-lg-1">Category :</label>
+							<div class="col-sm-12 col-lg-11">
+								@Html.DisplayFor(model => model.CategoryName)
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(Model.TypeName))
+			{
+				<div class="row pt-1">
+					<div class="col-sm-12 col-lg-12">
+						<div class="row">
+							<label for="inputEmail3" class="col-sm-12 col-lg-1">Type :</label>
+							<div class="col-sm-12 col-lg-11">
+								@Html.DisplayFor(model => model.TypeName)
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-2 ">Status :</label>
+						<div class="col-sm-12 col-lg-10">
+							@Html.DisplayFor(model => model.StatusName)
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-2">Publish On :</label>
+						<div class="col-sm-12 col-lg-10">
+							@Html.DisplayFor(model => model.PublishDate)
+						</div>
+					</div>
+				</div>
+			</div>
+
+			@if (Model.StrMediaFile != null)
+			{
+				<div class="row pt-1">
+					<div class="col-sm-12 col-lg-6">
+						<div class="row">
+							<label id="MediaTypeId" name="MediaTypeId" style="display:none;">@Model.MediaTypeId</label>
+							<label for="inputEmail3" class="col-sm-12 col-lg-3">Media File :</label>
+							@if (Model.MediaTypeId == (int)PostMediaTypeEnum.Audio)
+							{
+								<audio controls>
+									<source src="@Model.StrMediaFile" type="@mimeType" style="max-width:400px; max-height:400px;" />
+								</audio>
+							}
+							else if (Model.MediaTypeId == (int)PostMediaTypeEnum.Image)
+							{
+								<img id="image-preview-img"
+									 src="@(Model.StrMediaFile != null ? Url.Content(Model.StrMediaFile) : "#")"
+									 alt="Preview"
+									 style="max-width:400px; max-height:400px; display:block; border:1px solid #ccc; padding:4px;" />
+							}
+							else if (Model.MediaTypeId == (int)PostMediaTypeEnum.Video)
+							{
+								<video width="640" height="360" controls>
+									<source src="@Url.Content(Model.StrMediaFile)" type="@mimeType" style="max-width:400px; max-height:400px;" />
+									Your browser does not support the video tag.
+								</video>
+							}
+							else if (Model.MediaTypeId == (int)PostMediaTypeEnum.Text)
+							{
+								<label id="StrMediaFileFortxt" name="StrMediaFileFortxt" style="display:none;">@Model.StrMediaFile</label>
+								<pre id="preview" style="max-height: 400px !important;">Loading...</pre>
+							}
+						</div>
+					</div>
+				</div>
+			}
+
+
+			<div class="row pt-1">
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<div class="col-sm-12 col-lg-9 col-lg-offset-3">
+							<a asp-action="Index" class="formgraybtn mtp5 btn btn-custom">Back</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@section Scripts {
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const mediaType = parseInt(document.getElementById("MediaTypeId").textContent, 10);
+			if (mediaType == 5) {
+				const txtUrl = document.getElementById("StrMediaFileFortxt").textContent;
+				fetch(txtUrl).then(response => response.text()).then(data => {
+					document.getElementById('preview').textContent = data;
+				}).catch(error => {
+					document.getElementById('preview').textContent = "Failed to load text: " + error;
+				});
+			}
+		});
+	</script>
+}

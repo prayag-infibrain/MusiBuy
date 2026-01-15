@@ -1,0 +1,97 @@
+﻿@model MusiBuy.Common.Models.GenresViewModel
+@using MusiBuy.Common.Common
+@{
+    ViewData["Title"] = "Add Genres";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Add Genres
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form class="form" asp-action="Create" enctype="multipart/form-data" method="post" id="frmUpdateEnum">
+            <div class="form-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="GenreName">Genre name <span class="text-danger">*</span></label>
+                            <input asp-for="GenreName" maxlength="50" onkeydown="return IsAlpha(event);" class="form-control" placeholder="Genre name" />
+                            <span asp-validation-for="GenreName" class="text-danger"></span>
+                            <input asp-for="Id" type="hidden" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="CountryId">Country <span class="text-danger">*</span></label>
+                            <select asp-for="CountryId" class="form-control select2">
+                                <option value="">- Select Country -</option>
+                                @foreach (var item in Model.SelectCountry)
+                                {
+                                    <option value="@item.Value" data-key="@item.Key">@item.Text</option>
+                                }
+                            </select>
+                            @* <select asp-for="CountryId" asp-items="Model.SelectCountry" class="form-control borderfix select2">
+                                <option value="">- Select Country -</option>
+                            </select> *@
+                            <span asp-validation-for="CountryId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="RegionName">Region</label>
+                            <input asp-for="RegionName" maxlength="150" class="form-control" placeholder="Region" readonly/>
+                            <span asp-validation-for="RegionName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <div class="form-group">
+                            <label asp-for="Description">Description </label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="IsActive">Status </label>
+                            <div>
+                                <label>
+                                    <input type="radio" asp-for="IsActive" value="true" /> Active
+                                </label>
+                                &nbsp;
+                                <label>
+                                    <input type="radio" asp-for="IsActive" value="false" /> Inactive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    Save
+                </button>
+                <a asp-action="Index" class="btn btn-custom m-1">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/js/custom/genres.js")"></script>
+}

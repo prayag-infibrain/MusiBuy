@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcceptTerms" xml:space="preserve">
+    <value>Please accept terms &amp; conditions.</value>
+  </data>
+  <data name="AccountVerificationFaild" xml:space="preserve">
+    <value>Account verification is failed.</value>
+  </data>
+  <data name="AccountVerify" xml:space="preserve">
+    <value>Account verification is successfully.</value>
+  </data>
+  <data name="ActionStatus" xml:space="preserve">
+    <value>Request has been {0} successfully.</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>{0} has been activated successfully.</value>
+  </data>
+  <data name="ActiveInChat" xml:space="preserve">
+    <value>Can not dissociate child, as active in chat</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>{0} has been added successfully.</value>
+  </data>
+  <data name="AlreadyAddInCourse" xml:space="preserve">
+    <value>You have already enrolled in this course.</value>
+  </data>
+  <data name="AlreadyCancel" xml:space="preserve">
+    <value>{0} is already cancelled.</value>
+  </data>
+  <data name="AlreadyCompleted" xml:space="preserve">
+    <value>{0} already completed.</value>
+  </data>
+  <data name="AlreadyExists" xml:space="preserve">
+    <value>{0} bestaat al. Voer een andere waarde in/selecteer deze.</value>
+  </data>
+  <data name="AlreadyFavourite" xml:space="preserve">
+    <value>{0} already exists in your favourite list.</value>
+  </data>
+  <data name="AlreadyPerformed" xml:space="preserve">
+    <value>You cannot perform this action because another user has already performed this action.</value>
+  </data>
+  <data name="AlreadyPerformedExtend" xml:space="preserve">
+    <value>You already accepted/declined this extension request</value>
+  </data>
+  <data name="ApplicationFromSubmit" xml:space="preserve">
+    <value>Tutor application has been submitted  successfully.</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>{0} approved successfully.</value>
+  </data>
+  <data name="Archived" xml:space="preserve">
+    <value>{0} has been archived successfully.</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>{0} cancelled successfully.</value>
+  </data>
+  <data name="CannotBeAdded" xml:space="preserve">
+    <value>{0} cannot be added.</value>
+  </data>
+  <data name="CannotBeDeleted" xml:space="preserve">
+    <value>{0} cannot be deleted.</value>
+  </data>
+  <data name="CannotReschedule" xml:space="preserve">
+    <value>You cannot reschedule a reserved booking before a confirmed slot.</value>
+  </data>
+  <data name="ClueError" xml:space="preserve">
+    <value>Please enter Clue to the recording before approving it.</value>
+  </data>
+  <data name="CodriverExistWithCurrentUser" xml:space="preserve">
+    <value>With this email this codriver is already added by you.</value>
+  </data>
+  <data name="CombinationExists" xml:space="preserve">
+    <value>{0} combination with this {1} already exists. Try to choose different value.</value>
+  </data>
+  <data name="Confirmed" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+  <data name="CouponNotAttached" xml:space="preserve">
+    <value>This coupon is not attached with this car.Kindly enter only those coupon which are attached with this car.</value>
+  </data>
+  <data name="CouponNotAvailable" xml:space="preserve">
+    <value>This coupon is reached its maximum using capacity. Please select/enter different value.</value>
+  </data>
+  <data name="CourseMaxLimit" xml:space="preserve">
+    <value>You cannot enroll in this course, as we have received maximum number of acceptance for it.</value>
+  </data>
+  <data name="CurrentRoleUpdated" xml:space="preserve">
+    <value>{0} had been successfully updated, changes will be in effect on your next login.</value>
+  </data>
+  <data name="Declined" xml:space="preserve">
+    <value>{0} declined successfully.</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>{0} has been deleted successfully.</value>
+  </data>
+  <data name="DocumentNotUpload" xml:space="preserve">
+    <value>Document not uploaded.</value>
+  </data>
+  <data name="DocumentUploaded" xml:space="preserve">
+    <value>Document uploaded successfully.</value>
+  </data>
+  <data name="Drop" xml:space="preserve">
+    <value>Sorry! The record has been deleted from the system.</value>
+  </data>
+  <data name="Duplicate" xml:space="preserve">
+    <value>{0} is duplicate.</value>
+  </data>
+  <data name="EamilVerificationSuccess" xml:space="preserve">
+    <value>Your account is verified!</value>
+  </data>
+  <data name="EmailAlreadyVerified" xml:space="preserve">
+    <value>Your account is already verified.</value>
+  </data>
+  <data name="EmailDoesntExists" xml:space="preserve">
+    <value>{0} doesn't exist. Please enter another email.</value>
+  </data>
+  <data name="EmailNotSuccess" xml:space="preserve">
+    <value>Email was not sent.</value>
+  </data>
+  <data name="EmailNotVerified" xml:space="preserve">
+    <value>We found your email is pending for verification. Request you to verify your email to get started.</value>
+  </data>
+  <data name="EmailSent" xml:space="preserve">
+    <value>Email has been sent successfully.</value>
+  </data>
+  <data name="EmailVerificationFailed" xml:space="preserve">
+    <value>Email verification failed.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Some error occured, Please try again.</value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>{0} is expired.</value>
+  </data>
+  <data name="ExtendRequest" xml:space="preserve">
+    <value>{0} request has been {1} successfully.</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Account deletion failed</value>
+  </data>
+  <data name="FailedGeneratePrice" xml:space="preserve">
+    <value>Failed to generate stripe pricing, please contact administrator.</value>
+  </data>
+  <data name="FailedGenStripe" xml:space="preserve">
+    <value>Failed generating stripe paylink, please contact administrator.</value>
+  </data>
+  <data name="FailedGoogleLink" xml:space="preserve">
+    <value>Error in connecting google drive, please try after sometime.</value>
+  </data>
+  <data name="FillUpAllFields" xml:space="preserve">
+    <value>Please filled all the required fileds.</value>
+  </data>
+  <data name="HintAndClueError" xml:space="preserve">
+    <value>Please enter Clue and Hint to the recording before approving it.</value>
+  </data>
+  <data name="HintError" xml:space="preserve">
+    <value>Please enter Hint to the recording before approving it.</value>
+  </data>
+  <data name="Imported" xml:space="preserve">
+    <value>{0} data imported successfullly.</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>{0} has been inactivated successfully.</value>
+  </data>
+  <data name="InsufficientBalance" xml:space="preserve">
+    <value>You don't have sufficient balance for weekly recurring booking.</value>
+  </data>
+  <data name="InsufficientBalanceThisWeek" xml:space="preserve">
+    <value>Insufficient balance to confirm next reserved slot. Please top up and book again.</value>
+  </data>
+  <data name="InValid" xml:space="preserve">
+    <value>Invalid {0}.</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Invalid email address.</value>
+  </data>
+  <data name="InvalidFirstName" xml:space="preserve">
+    <value>Enter valid first name.</value>
+  </data>
+  <data name="InvalidLink" xml:space="preserve">
+    <value>{0} link is invalid.</value>
+  </data>
+  <data name="Invalidlogin" xml:space="preserve">
+    <value>Invalid login attempt.</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Password should contain one capital letter, one small letter, one special character and atleast one numeric value and minimum 6 characters allowed.</value>
+  </data>
+  <data name="InvalidPhoneNumber" xml:space="preserve">
+    <value>Enter valid phone number.</value>
+  </data>
+  <data name="Invalidrequest" xml:space="preserve">
+    <value>Invalid request.</value>
+  </data>
+  <data name="InValidSubCategory" xml:space="preserve">
+    <value>Category/SubCategory is invalid. Enter/Select different value.</value>
+  </data>
+  <data name="IsInUse" xml:space="preserve">
+    <value>One or more {0} are in use.</value>
+  </data>
+  <data name="MailSend" xml:space="preserve">
+    <value>Mail successfully send to {0}.</value>
+  </data>
+  <data name="MarkAsFeaturedBlog" xml:space="preserve">
+    <value>Blog is marked as {0}.</value>
+  </data>
+  <data name="Marked" xml:space="preserve">
+    <value>{0} marked successfully.</value>
+  </data>
+  <data name="MaxAllowedLength" xml:space="preserve">
+    <value>Only {1} characters allowed for {0}.</value>
+  </data>
+  <data name="MaxFileLength" xml:space="preserve">
+    <value>The File must be under 250 mb.</value>
+  </data>
+  <data name="MinMaxAllowedLength" xml:space="preserve">
+    <value>{0} must be {2} to {1} characters long.</value>
+  </data>
+  <data name="MinOneEnter" xml:space="preserve">
+    <value>Please enter at least one {0}.</value>
+  </data>
+  <data name="MinOneEnterForEach" xml:space="preserve">
+    <value>Please enter at least one {0} for each {1}.</value>
+  </data>
+  <data name="MobileNumberNotVerified" xml:space="preserve">
+    <value>We found your mobile number is pending for verification. Request you to verify your mobile number to get started.</value>
+  </data>
+  <data name="NewPasswordCanNotBeSame" xml:space="preserve">
+    <value>Het nieuwe wachtwoord mag niet hetzelfde zijn als het oude wachtwoord.</value>
+  </data>
+  <data name="NewWalletPinCanNotBeSame" xml:space="preserve">
+    <value>New wallet pin can not be same as old wallet pin.</value>
+  </data>
+  <data name="NoCheckBoxSelect" xml:space="preserve">
+    <value>Please select at least one checkbox to approve.</value>
+  </data>
+  <data name="NoEmailFound" xml:space="preserve">
+    <value>{0} must first sign up in order for you to link accounts.</value>
+  </data>
+  <data name="NoEmailSent" xml:space="preserve">
+    <value>{0} has been added successfully. Email was not sent successfully.</value>
+  </data>
+  <data name="NoOfDays" xml:space="preserve">
+    <value>{0} are required.</value>
+  </data>
+  <data name="NoRecordFound" xml:space="preserve">
+    <value>No record found.</value>
+  </data>
+  <data name="NoSelect" xml:space="preserve">
+    <value>Please select at least one checkbox to delete.</value>
+  </data>
+  <data name="NotAbleToActionThis" xml:space="preserve">
+    <value>You are not able to perform this action.</value>
+  </data>
+  <data name="NotAdded" xml:space="preserve">
+    <value>{0} not added successfully.</value>
+  </data>
+  <data name="NotApprove" xml:space="preserve">
+    <value>{0} has been not approved successfully.</value>
+  </data>
+  <data name="NotApproveByAdmin" xml:space="preserve">
+    <value>You are not approved by admin.</value>
+  </data>
+  <data name="NotAssociated" xml:space="preserve">
+    <value>{0} not associated.</value>
+  </data>
+  <data name="NotAuthorized" xml:space="preserve">
+    <value>You are not authorized to view requested page.</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>{0} is not available from {1} to {2}. Please select new date.</value>
+  </data>
+  <data name="NTearFluidhanged" xml:space="preserve">
+    <value>{0} not changed.</value>
+  </data>
+  <data name="NotDelectable" xml:space="preserve">
+    <value>Sorry! The record was not delectable.</value>
+  </data>
+  <data name="NotDeleteCoDriverUsedInBooking" xml:space="preserve">
+    <value>This codriver is not delete because it is use in booking.</value>
+  </data>
+  <data name="NotDeleted" xml:space="preserve">
+    <value>{0} not deleted successfully.</value>
+  </data>
+  <data name="NotEditable" xml:space="preserve">
+    <value>Sorry! The record was not editable.</value>
+  </data>
+  <data name="NotEditAdmin" xml:space="preserve">
+    <value>You can't edit admin record.</value>
+  </data>
+  <data name="NotEnoughBalance" xml:space="preserve">
+    <value>Insufficient balance. Please top up.</value>
+  </data>
+  <data name="NotEnteredRequiredField" xml:space="preserve">
+    <value>You have not entered/selected any of required field(s).</value>
+  </data>
+  <data name="NotesAlreadyAdded" xml:space="preserve">
+    <value>Lesson notes already added.</value>
+  </data>
+  <data name="NotExists" xml:space="preserve">
+    <value>{0} does not exists.</value>
+  </data>
+  <data name="NotExistsUser" xml:space="preserve">
+    <value>Gebruiker bestaat niet.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>No {0} found.</value>
+  </data>
+  <data name="NotificationSent" xml:space="preserve">
+    <value>Notification has been sent successfully.</value>
+  </data>
+  <data name="NoTimeSlots" xml:space="preserve">
+    <value>No Time Slots Available</value>
+  </data>
+  <data name="NotRescheduled" xml:space="preserve">
+    <value>{0} has been not rescheduled.</value>
+  </data>
+  <data name="NotSame" xml:space="preserve">
+    <value>{0} and {1} are must not be same for booking.</value>
+  </data>
+  <data name="NotSuccessful" xml:space="preserve">
+    <value>{0} not {1} successfully.</value>
+  </data>
+  <data name="NotSufficientWalletBalance" xml:space="preserve">
+    <value>You have not sufficient wallet balance to withdrawn.</value>
+  </data>
+  <data name="NotUpdated" xml:space="preserve">
+    <value>{0} not updated successfully.</value>
+  </data>
+  <data name="NotUploaded" xml:space="preserve">
+    <value>Please upload at least one file.</value>
+  </data>
+  <data name="NotVerified" xml:space="preserve">
+    <value>{0} not verified.</value>
+  </data>
+  <data name="NotWishListAdded" xml:space="preserve">
+    <value>{0} has been not added in wish list successfully.</value>
+  </data>
+  <data name="OldPasswordDoNotMatch" xml:space="preserve">
+    <value>Old password entered incorrectly. Please retry.</value>
+  </data>
+  <data name="OldWalletPinDoNotMatch" xml:space="preserve">
+    <value>Old wallet pin do not match with our data, enter proper value.</value>
+  </data>
+  <data name="OneNonWhiteSpace" xml:space="preserve">
+    <value>{0} must contain at least one non-whitespace character.</value>
+  </data>
+  <data name="OTPNotSent" xml:space="preserve">
+    <value>Otp wordt niet verzonden.</value>
+  </data>
+  <data name="OtpSent" xml:space="preserve">
+    <value>OTP verzonden naar e-mail. (Check spam indien niet ontvangen)</value>
+  </data>
+  <data name="OtpVerificationFailed" xml:space="preserve">
+    <value>Codeverificatie mislukt.</value>
+  </data>
+  <data name="OTPVerified" xml:space="preserve">
+    <value>OTP is succesvol geverifieerd.</value>
+  </data>
+  <data name="PasswordDoNotMatch" xml:space="preserve">
+    <value>Confirm password' and 'Password' do not match.</value>
+  </data>
+  <data name="PasswordNTearFluidhange" xml:space="preserve">
+    <value>Wachtwoord niet gewijzigd.</value>
+  </data>
+  <data name="PasswordNotMatched" xml:space="preserve">
+    <value>Voer het juiste oude wachtwoord in.</value>
+  </data>
+  <data name="PastdateLessonNotAllowed" xml:space="preserve">
+    <value>You can schedule only a lesson for a future date &amp; time.</value>
+  </data>
+  <data name="ProfileImageUpdated" xml:space="preserve">
+    <value>Profile image updated successfully.</value>
+  </data>
+  <data name="ProfileNotUpdated" xml:space="preserve">
+    <value>Profiel is niet bijgewerkt.</value>
+  </data>
+  <data name="ProfileUpdated" xml:space="preserve">
+    <value>Profiel is succesvol bijgewerkt.</value>
+  </data>
+  <data name="QuantityMissmatch" xml:space="preserve">
+    <value>Available quantity and entered quantity do not match.</value>
+  </data>
+  <data name="ReActivated" xml:space="preserve">
+    <value>{0} has been reactivate successfully.</value>
+  </data>
+  <data name="ReferralCodeNotMatched" xml:space="preserve">
+    <value>Referral code not matched.</value>
+  </data>
+  <data name="RegistrationFailed" xml:space="preserve">
+    <value>Registration failed, Please try again.</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>{0} rejected successfully.</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>{0} is required.</value>
+  </data>
+  <data name="Rescheduled" xml:space="preserve">
+    <value>{0} has been rescheduled successfully.</value>
+  </data>
+  <data name="Reserved" xml:space="preserve">
+    <value>Weekly-reserved</value>
+  </data>
+  <data name="ResetPasswordMail" xml:space="preserve">
+    <value>Reset password email has been sent to your registered email address.</value>
+  </data>
+  <data name="Resolved" xml:space="preserve">
+    <value>{0} resolved successfully.</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Saved successfully.</value>
+  </data>
+  <data name="SendSuccess" xml:space="preserve">
+    <value>{0} has been sent successfully.</value>
+  </data>
+  <data name="Session" xml:space="preserve">
+    <value>Session was expired, Please make entries again and save the record.</value>
+  </data>
+  <data name="SettingUpdated" xml:space="preserve">
+    <value>{0} updated successfully.</value>
+  </data>
+  <data name="SignInSuccess" xml:space="preserve">
+    <value>Congratulations! You have successfully registered with Toddler Talk.</value>
+  </data>
+  <data name="SignupSuccess" xml:space="preserve">
+    <value>OTP sent to email. (Check spam if not received)</value>
+  </data>
+  <data name="SignupSuccessEmailNotSent" xml:space="preserve">
+    <value>Congratulations! You have successfully registered with CityForceSolutions. Verify email was not sent successfully.</value>
+  </data>
+  <data name="StartDateLessThanEndDate" xml:space="preserve">
+    <value>Start date should be less than end date.</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>{0} status has been changed successfully.</value>
+  </data>
+  <data name="StatusChange" xml:space="preserve">
+    <value>{0} has been deactivate successfully.</value>
+  </data>
+  <data name="StatusNTearFluidhange" xml:space="preserve">
+    <value>Lesson status changed. Please refresh the page.</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="SuccessChanged" xml:space="preserve">
+    <value>{0} has been changed successfully.</value>
+  </data>
+  <data name="SuccessChangePassword" xml:space="preserve">
+    <value>Wachtwoord is succesvol gewijzigd.</value>
+  </data>
+  <data name="Successfully" xml:space="preserve">
+    <value>{0} has been {1} successfully.</value>
+  </data>
+  <data name="SuccessLogin" xml:space="preserve">
+    <value>Succesvol ingelogd.</value>
+  </data>
+  <data name="SuccessLogOut" xml:space="preserve">
+    <value>You have been successfully logged out from the system.</value>
+  </data>
+  <data name="SuccessResetPassword" xml:space="preserve">
+    <value>Wachtwoord is succesvol gereset.</value>
+  </data>
+  <data name="TimeOut" xml:space="preserve">
+    <value>Failed to confirm in time.</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>{0} has been completed.</value>
+  </data>
+  <data name="Unarchived" xml:space="preserve">
+    <value>{0} has been unarchived successfully.</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>{0} has been marked unavailable successfully.</value>
+  </data>
+  <data name="Unmarked" xml:space="preserve">
+    <value>{0} unmarked successfully.</value>
+  </data>
+  <data name="UnMarkedAsFeatured" xml:space="preserve">
+    <value>Tutor is un-marked as featured.</value>
+  </data>
+  <data name="UnMarkedAsFeaturedBlog" xml:space="preserve">
+    <value>Blog is un-marked as featured.</value>
+  </data>
+  <data name="UnMarkedFullyBook" xml:space="preserve">
+    <value>Tutor is un-marked as fully booked.</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>{0} has been updated successfully.</value>
+  </data>
+  <data name="UpdatedInMaintenance" xml:space="preserve">
+    <value>{0} has been updated in {1} successfully.</value>
+  </data>
+  <data name="UploadAtleastOnePhoto" xml:space="preserve">
+    <value>Upload at least one photo.</value>
+  </data>
+  <data name="UploadMaxAudioSize" xml:space="preserve">
+    <value>File size should not be more than {0} MB.</value>
+  </data>
+  <data name="UploadMaxFileSize" xml:space="preserve">
+    <value>File size should not be more than {0} MB.</value>
+  </data>
+  <data name="UploadOnlyValidFile" xml:space="preserve">
+    <value>You can upload files with {0} extensions only.</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>Url is not valid.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="UserAlreadyExists" xml:space="preserve">
+    <value>{0} already exists. Please use login.</value>
+  </data>
+  <data name="UserProfileUpdated" xml:space="preserve">
+    <value>User profile has been updated successfully.</value>
+  </data>
+  <data name="ValueNotAvailable" xml:space="preserve">
+    <value>{0} already exists. Enter/Select different value.</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>{0} verified successfully.</value>
+  </data>
+  <data name="WRNotAvailable" xml:space="preserve">
+    <value>This time is not available as a weekly-recurring slot.</value>
+  </data>
+  <data name="WrongUsername" xml:space="preserve">
+    <value>Username or password is wrong.</value>
+  </data>
+</root>

@@ -1,0 +1,77 @@
+﻿@model MusiBuy.Common.Models.RecipientViewModel
+@using MusiBuy.Common.Common;
+@{
+    ViewData["Title"] = "Edit Recipient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Edit Recipient
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-content collapse show">
+        <div class="card-body">
+            <form asp-action="edit" method="post" class="form-horizontal formstyle">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="TemplateId" type="hidden" />
+                <input asp-for="Id" type="hidden" />
+                <div id="duplicateRecord" class="validation-summary-errors d-none">
+                    <ul>
+                        <li>
+                            @Html.Encode(String.Format(Messages.CombinationExists, "E-mail", "template"))
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TemplateName">Template name :</label>
+                    <label asp-for="TemplateName" class="control-label"> @Model.TemplateName</label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName">First name <span class="text-danger">*</span> </label>
+                    <input asp-for="FirstName" class="form-control" maxlength="20" placeholder="First name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName">Last name <span class="text-danger">*</span> </label>
+                    <input asp-for="LastName" class="form-control" maxlength="20" placeholder="Last name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">Email <span class="text-danger">*</span> </label>
+                    <input asp-for="Email" class="form-control" maxlength="100" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsActive" class="control-label ">Status </label>
+                    <div class="">
+                        <label>
+                            <input type="radio" asp-for="IsActive" value="false" /> Active
+                        </label>
+
+                        <label>
+                            <input type="radio" asp-for="IsActive" value="True" /> Inactive
+                        </label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Update
+                    </button>
+                    <a asp-action="Index" asp-controller="Recipient" asp-route-id="@Model.TemplateId" class="btn btn-custom m-1">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/js/custom/recipient.js")"></script>
+}

@@ -1,0 +1,45 @@
+﻿@using MusiBuy.Marketing.Helper
+@{
+    var querystringValue = this.Context.Request.Path.Value.Split("/")[1];
+    var routValue = "";
+    var name = "";
+    if (querystringValue.ToLower() == "recipient")
+    {
+        routValue = this.Context.Request.Path.Value.Split("/")[3];
+    }
+
+    // string breadScrumName = CurrentUserSession.ViewRoleMenus.ViewRoleMenu.
+    //     Where(x => x.ParentId.HasValue && x.ParentId.Value > 0 && x.MenuItemController.ToLower() == querystringValue.ToLower()).
+    //     Select(x => x.MenuItemName).FirstOrDefault();
+
+    // if (string.IsNullOrWhiteSpace(breadScrumName))
+    // {
+    //     breadScrumName = CurrentUserSession.ViewRolePrivileges.ViewRolePrivileges.
+    //         Where(x => (!x.MenuItem.ParentId.HasValue || (x.MenuItem.ParentId.HasValue && x.MenuItem.ParentId.Value == 0)) && x.MenuItem.MenuItemController != null && x.MenuItem.MenuItemController.ToLower() == querystringValue.ToLower()).
+    //         Select(x => x.MenuItem.MenuItemName).FirstOrDefault();
+    // }
+}
+
+@if (querystringValue.ToLower() == "home")
+{
+    name = "Dashboard";
+}
+else if (querystringValue.ToLower() == "recipient")
+{
+    name = "Recipient";
+}
+else if (querystringValue.ToLower() == "proteinsdata")
+{
+    name = "Protein Data";
+}
+else
+{
+    @* name = @breadScrumName; *@
+    name = "";
+}
+<ul class="breadcrumb fw-bold fs-base my-1">
+    <li class="breadcrumb-item text-muted">
+        <a asp-action="Home" asp-controller="Home" class="text-muted text-hover-primary">Home</a>
+    </li>
+    <li class="breadcrumb-item text-muted">@name</li>
+</ul>

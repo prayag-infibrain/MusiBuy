@@ -1,0 +1,127 @@
+Testing Modual For MusiBuy
+
+1.	Login / Logout (Done)
+2.	Forgot & Reset Password (Function Done) (Design Pending)
+3.	Edit Profile (Done) (Profile Pichture Pending)
+4.	Change Password (Done)
+5.	Admin User Management (Done)
+6.	Role Management (Done)
+7.	Role Privileges Management (Done)
+8.	Common Site Settings (Done)
+9.	Email Template Management (Done)
+10.	Recipient Management (Done)
+11.	Enum Management (Done)
+12.	Content Management (Done)
+13.	Creator Management (Done)
+14.	Customer Management (Done)
+18.	Post Management
+20.	Dashboard
+21.	Event ManagementTesting Modual For MusiBuy
+
+1.	Login / Logout (Done)
+2.	Forgot & Reset Password (Function Done) (Design Pending)
+3.	Edit Profile (Done) (Profile Pichture Pending)
+4.	Change Password (Done)
+5.	Admin User Management (Done)
+6.	Role Management (Done)
+7.	Role Privileges Management (Done)
+8.	Common Site Settings (Done)
+9.	Email Template Management (Done)
+10.	Recipient Management (Done)
+11.	Enum Management (Done)
+12.	Content Management (Done)
+13.	Creator Management (Done)
+14.	Customer Management (Done)
+18.	Post Management
+20.	Dashboard
+21.	Event ManagementTesting Modual For MusiBuy
+
+1.	Login / Logout (Done)
+2.	Forgot & Reset Password (Function Done) (Design Pending)
+3.	Edit Profile (Done) (Profile Pichture Pending)
+4.	Change Password (Done)
+5.	Admin User Management (Done)
+6.	Role Management (Done)
+7.	Role Privileges Management (Done)
+8.	Common Site Settings (Done)
+9.	Email Template Management (Done)
+10.	Recipient Management (Done)
+11.	Enum Management (Done)
+12.	Content Management (Done)
+13.	Creator Management (Done)
+14.	Customer Management (Done)
+18.	Post Management
+20.	Dashboard
+21.	Event ManagementTesting Modual For MusiBuy
+
+1.	Login / Logout (Done)
+2.	Forgot & Reset Password (Function Done) (Design Pending)
+3.	Edit Profile (Done) (Profile Pichture Pending)
+4.	Change Password (Done)
+5.	Admin User Management (Done)
+6.	Role Management (Done)
+7.	Role Privileges Management (Done)
+8.	Common Site Settings (Done)
+9.	Email Template Management (Done)
+10.	Recipient Management (Done)
+11.	Enum Management (Done)
+12.	Content Management (Done)
+13.	Creator Management (Done)
+14.	Customer Management (Done)
+18.	Post Management
+20.	Dashboard
+21.	Event ManagementTesting Modual For MusiBuy
+
+1.	Login / Logout (Done)
+2.	Forgot & Reset Password (Function Done) (Design Pending)
+3.	Edit Profile (Done) (Profile Pichture Pending)
+4.	Change Password (Done)
+5.	Admin User Management (Done)
+6.	Role Management (Done)
+7.	Role Privileges Management (Done)
+8.	Common Site Settings (Done)
+9.	Email Template Management (Done)
+10.	Recipient Management (Done)
+11.	Enum Management (Done)
+12.	Content Management (Done)
+13.	Creator Management (Done)
+14.	Customer Management (Done)
+18.	Post Management
+20.	Dashboard
+21.	Event ManagementTesting Modual For MusiBuy
+
+1.	Login / Logout (Done)
+2.	Forgot & Reset Password (Function Done) (Design Pending)
+3.	Edit Profile (Done) (Profile Pichture Pending)
+4.	Change Password (Done)
+5.	Admin User Management (Done)
+6.	Role Management (Done)
+7.	Role Privileges Management (Done)
+8.	Common Site Settings (Done)
+9.	Email Template Management (Done)
+10.	Recipient Management (Done)
+11.	Enum Management (Done)
+12.	Content Management (Done)
+13.	Creator Management (Done)
+14.	Customer Management (Done)
+18.	Post Management
+20.	Dashboard
+21.	Event ManagementTesting Modual For MusiBuy
+
+1.	Login / Logout (Done)
+2.	Forgot & Reset Password (Function Done) (Design Pending)
+3.	Edit Profile (Done) (Profile Pichture Pending)
+4.	Change Password (Done)
+5.	Admin User Management (Done)
+6.	Role Management (Done)
+7.	Role Privileges Management (Done)
+8.	Common Site Settings (Done)
+9.	Email Template Management (Done)
+10.	Recipient Management (Done)
+11.	Enum Management (Done)
+12.	Content Management (Done)
+13.	Creator Management (Done)
+14.	Customer Management (Done)
+18.	Post Management
+20.	Dashboard
+21.	Event Management

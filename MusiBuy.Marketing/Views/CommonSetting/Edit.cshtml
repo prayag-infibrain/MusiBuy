@@ -1,0 +1,129 @@
+﻿@model MusiBuy.Common.Models.CommonSettingViewModel
+@{
+    ViewData["Title"] = "Common Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Common Settings
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="form-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+            <div id="messageCommonSetting" class="error-message" style="display:none;">
+            </div>
+            <form asp-action="Edit" method="post" enctype="multipart/form-data" id="formCommonSetting">
+                <div class="bluetitlebox">
+                    <h4>Email server configuration</h4>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="SMTPServer">SMTP server <span class="text-danger">*</span></label>
+                            <input asp-for="SMTPServer" class="form-control" maxlength="50" placeholder="SMTP server" />
+                            <span asp-validation-for="SMTPServer" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="Email">Email</label>
+                            <input asp-for="Email" class="form-control" maxlength="250" placeholder="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="Password">Password <span class="text-danger">*</span></label>
+                            <input asp-for="Password" class="form-control" maxlength="50" placeholder="Password" value="@Model.Password" type="password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <span style="color: green" id='result'></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="Port">Port <span class="text-danger">*</span></label>
+                            <input asp-for="Port" class="form-control" maxlength="4" placeholder="Port" onkeydown="return isNumberOnlyKey(this,event);" />
+                            <span asp-validation-for="Port" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix ptp20">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="IsSSL">Is SSL </label>
+                                @if (Model.IsSSL)
+                                {
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" asp-for="IsSSL" value="true" checked /> @Html.DisplayNameFor(model => model.IsSSL)
+                                        </label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" asp-for="IsSSL" value="true" /> @Html.DisplayNameFor(model => model.IsSSL)
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bluetitlebox">
+                    <h4>Common settings</h4>
+                </div>
+                <div class="clearfix ptp20">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="SiteURL">Site URL <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="input-group-text form-control"><b>https://</b></span>
+                                    </span>
+                                    <input asp-for="SiteURL" placeholder="Site URL" class="form-control" maxlength="100" />
+                                </div>
+                                <span class="text-danger" asp-validation-for="SiteURL"></span>
+                            </div>
+                        </div>                       
+                        
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-8">
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-8 col-lg-offset-4">
+                                    <button name="btnSubmit" value="Update" title="Update" type="submit" class="btn btn-primary" id="btnSubmit">
+                                        Update
+                                    </button>
+                                    <a asp-action="home" asp-controller="home" title="Back" class="btn btn-custom m-1">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="@Url.Content("~/js/custom/common-setting.js")"></script>
+}

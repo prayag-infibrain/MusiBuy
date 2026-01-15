@@ -1,0 +1,176 @@
+﻿@model MusiBuy.Common.Models.CreatoresViewModel
+@using MusiBuy.Common.Common
+@using MusiBuy.Common.Enumeration
+@{
+	ViewData["Title"] = "Add Creator";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+	<div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+		<div class="breadcrumb-header justify-content-between">
+			<div class="left-content">
+				<h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+					Add Creator
+					<small class="text-muted fs-6 fw-normal ms-1"></small>
+				</h1>
+				<partial name="_BreadCrumb" />
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card">
+	<div class="card-body">
+		<form asp-action="Create" method="post" class="form-horizontal formstyle" id="frmUser" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div id="display-messages"></div>
+			<input asp-for="Id" type="hidden" />
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="FirstName">First Name <span class="text-danger">*</span></label>
+						<input asp-for="FirstName" maxlength="50" class="form-control" placeholder="First Name" />
+						<span asp-validation-for="FirstName" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="LastName">Last Name </label>
+						<input asp-for="LastName" maxlength="50" class="form-control" placeholder="Last Name" />
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="RoleId">Role <span class="text-danger">*</span></label>
+						<select asp-for="RoleId" asp-items="Model.SelectRole" class="form-control borderfix">
+							<option value="" selected="selected">- Select role -</option>
+						</select>
+						<span asp-validation-for="RoleId" class="text-danger"></span>
+					</div>
+				</div>			
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="Email">Email <span class="text-danger">*</span></label>
+						<input asp-for="Email" maxlength="250" class="form-control" placeholder="Email" />
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="Phone">Phone <span class="text-danger">*</span></label>
+						<input asp-for="Phone" class="form-control" maxlength="20" placeholder="Phone" onkeydown="return isNumberOnlyKey(this,event);" />
+						<span asp-validation-for="Phone" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="ProfilePicture">Profile picture</label>
+						<input type="file" asp-for="ProfilePicture" class="form-control" accept=".jpg,.jpeg,.png,.bmp" />
+						<span asp-validation-for="ProfilePicture" class="text-danger"></span>
+						
+					</div>
+					<div id="image-preview" style="position:relative; margin-top:10px; display:none;">
+						<img id="image-preview-img"
+							 src="#"
+							 alt="Preview"
+							 style="max-width:200px; max-height:200px; display:block; border:1px solid #ccc; padding:4px;" />
+						<button type="button"
+								id="remove-image"
+								style="position:absolute; top:0; background:rgba(0,0,0,0.6); color:#fff; border:none; border-radius:50%; width:24px; height:24px; line-height:20px; text-align:center; cursor:pointer;">
+							×
+						</button>
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+					<div class="form-group">
+						<label asp-for="Bio">Bio </label>
+						<textarea asp-for="Bio" class="form-control" placeholder="Bio"></textarea>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="IsActive">Status </label>
+						<div>
+							<label>
+								<input type="radio" asp-for="IsActive" value="true" /> Active
+							</label>
+							&nbsp;
+							<label>
+								<input type="radio" asp-for="IsActive" value="false" /> Inactive
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button name="btnSubmit" type="submit" class="btn btn-primary" id="btnSubmit" value="Save">
+					Save
+				</button>
+				<a asp-action="Index" class="btn btn-custom m-1">Back</a>
+			</div>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	<script src="@Url.Content("~/js/user-bundle.js")"></script>
+	<script src="@Url.Content("~/js/custom/user.js")" type="text/javascript"></script>
+
+	<script>
+		$(function(){
+		  const maxSizeMB = @GlobalCode.ImageSize;
+		  const maxSizeBytes = maxSizeMB * 1024 * 1024;
+		  const allowedImageExtensions = @Html.Raw(Json.Serialize(GlobalCode.AllowImgFileExt.Select(ext => ext.ToLower()).Distinct()));
+
+		  $("#ProfilePicture").on("change", function(e) {
+			const file = this.files[0];
+			$("#ProfilePicture-error").html("");
+
+			if (!file) {
+			  $("#ProfilePicture-preview").hide();
+			  return;
+			}
+
+			const fileExtension = file.name.split('.').pop().toLowerCase();
+
+			if (!allowedImageExtensions.includes(fileExtension)) {
+				$("#ProfilePicture-error").html("Only images with .jpg, .jpeg, .png & .bmp extensions are allowed.");
+				$(this).val("");
+				$("#ProfilePicture-preview").hide();
+				return;
+			}
+
+			if (file.size > maxSizeBytes) {
+			  $("#ProfilePicture-error").html("Image must be under " + maxSizeMB + " MB.");
+			  $("#ProfilePicture-preview").hide();
+			  return;
+			}
+
+			const reader = new FileReader();
+			reader.onload = function(evt) {
+			  $("#ProfilePicture-preview-img").attr("src", evt.target.result);
+			  $("#ProfilePicture-preview").show();
+			};
+			reader.readAsDataURL(file);
+		  });
+
+		  $("#remove-image").on("click", function(){
+			$("#ProfilePicture").val("");
+			$("#ProfilePicture-preview-img").attr("src", "#");
+			$("#ProfilePicture-preview").hide();
+		  });
+		});
+
+	</script>
+
+}

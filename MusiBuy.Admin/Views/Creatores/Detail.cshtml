@@ -1,0 +1,118 @@
+﻿@model MusiBuy.Common.Models.CreatoresViewModel
+@{
+	ViewData["Title"] = "Creator Detail";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+	<div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+		<div class="breadcrumb-header justify-content-between">
+			<div class="left-content">
+				<h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+					Creator Detail
+					<small class="text-muted fs-6 fw-normal ms-1"></small>
+				</h1>
+				<partial name="_BreadCrumb" />
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card">
+	<div class="card-body">
+		<form class="form-horizontal formstyle">
+
+			<div class="row pt-1">
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-3">First name :</label>
+						<div class="col-sm-12 col-lg-6">
+							@Html.DisplayFor(model => model.FirstName)
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-3">Last name :</label>
+						<div class="col-sm-12 col-lg-6">
+							@Html.DisplayFor(model => model.LastName)
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row pt-1">
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-3">Email :</label>
+						<div class="col-sm-12 col-lg-6">
+							@Html.DisplayFor(model => model.Email)
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-3">Phone :</label>
+						<div class="col-sm-12 col-lg-6">
+							@Html.DisplayFor(model => model.Phone)
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-3 ">Bio :</label>
+						<div class="col-sm-12 col-lg-6">
+							@Html.DisplayFor(model => model.Bio)
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row pt-1">
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-3">Role :</label>
+						<div class="col-sm-12 col-lg-6">
+							@Html.DisplayFor(model => model.RoleName)
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-12 col-lg-3">Status :</label>
+						<div class="col-sm-12 col-lg-6">
+							@Html.DisplayFor(model => model.Active)
+						</div>
+					</div>
+				</div>
+			</div>
+
+			@if (Model.StrProfilePicture != null)
+			{
+				<div class="row pt-1">
+					<div class="col-sm-12 col-lg-12">
+						<div class="row">
+							<label for="inputEmail3" class="col-sm-12 col-lg-3">Profile picture :</label>
+							<div class="col-sm-12 col-lg-12">
+								<img id="image-preview-img"
+									 src="@(Model.StrProfilePicture != null ? Url.Content(Model.StrProfilePicture) : "#")"
+									 alt="Preview"
+									 style="max-width:200px; max-height:200px; display:block; border:1px solid #ccc; padding:4px;" />
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+			<div class="row pt-2">
+				<div class="col-sm-12 col-lg-6">
+					<div class="row">
+						<div class="col-sm-12 col-lg-9 col-lg-offset-3">
+							<a asp-action="Index" class="formgraybtn mtp5 btn btn-custom">Back</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

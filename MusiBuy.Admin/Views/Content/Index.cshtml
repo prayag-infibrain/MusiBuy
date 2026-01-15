@@ -1,0 +1,101 @@
+﻿@model MusiBuy.Common.Models.ContentManagementsViewModel
+@using Kendo.Mvc.UI
+@using MusiBuy.Admin.Helper
+@using MusiBuy.Common.Common
+@{
+    ViewData["Title"] = "Content Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Microsoft.Extensions.Primitives.StringValues queryVal;
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Content Management
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form asp-action="index" method="post" class="form-horizontal formstyle" id="frmContent" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div id="duplicateRecord" class="validation-summary-errors d-none">
+                <ul>
+                    <li>
+                        @Html.Encode(String.Format(Messages.CombinationExists, "E-mail", "template"))
+                    </li>
+                </ul>
+            </div>
+            @if (Context.Request.Query.TryGetValue("msg", out queryVal) && queryVal.FirstOrDefault().ToLower() == "change")
+            {
+                <div class="green-box">
+                    <ul>
+                        <li>
+                            @Html.Raw(string.Format(Messages.Updated, "Page Content"))
+                        </li>
+                    </ul>
+                </div>
+            }
+            <div class="form-group">
+                <label for="inputEmail3">Page name <span class="text-danger">*</span></label>
+                <select asp-for="PageId" id="PageId" asp-items="Model.PageList" class="form-control borderfix dropDown">
+                    <option value="">- Select page name -</option>
+                </select>
+            </div>
+            <div id="PageContent1">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="control-label">Page title <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Title" placeholder="Page title" class="form-control" maxlength="50" />
+                            <input asp-for="Id" type="hidden" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="control-label">Content <span class="text-danger">*</span></label>
+                    <div>
+                        <textarea asp-for="Content" class="form-control" rows="10" cols="50" placeholder="Content"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="form-group">
+                            <label asp-for="IsActive">Status </label>
+                            <div>
+                                <label>
+                                    <input type="radio" asp-for="IsActive" value="true" /> Active
+                                </label>
+                                <label>
+                                    <input type="radio" asp-for="IsActive" value="false" /> Inactive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    @if (CurrentAdminSession.HasAddPermission || CurrentAdminSession.HasEditPermission)
+                    {
+                        <button type="submit" class="btn btn-primary" name="btnSubmit" id="btnSubmit" value="Save" title="Save">
+                            Save
+                        </button>
+                        <a asp-action="index" method="get" asp-controller="Content" class="btn btn-custom m-1">Back</a>
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="@Url.Content("~/lib/jquery-validation/dist/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/js/common/ckeditor/ckeditor.js")"></script>
+    <script src="@Url.Content("~/js/custom/content-management.js")"></script>
+}

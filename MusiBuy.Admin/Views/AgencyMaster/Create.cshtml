@@ -1,0 +1,56 @@
+﻿@model MusiBuy.Common.Models.AgencyMasterViewModel
+@{
+    ViewData["Title"] = "Add Agency";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Add Agency
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form class="form" asp-action="Create" id="roleFrm">
+            <div class="form-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="companyName">Name <span class="text-danger">*</span></label>
+                    <input type="text" asp-for="Name" maxlength="50" class="form-control" placeholder="Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="companyinput1">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="5" maxlength="255" placeholder="Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status">Status </label>
+                    <div>
+                        <label>
+                            <input type="radio" asp-for="Status" value="true" /> Active
+                        </label>
+                        <label>
+                            <input type="radio" asp-for="Status" value="false" /> Inactive
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="roleBtn">
+                    Save
+                </button>
+                <a asp-action="Index" class="btn btn-custom m-1">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/js/custom/AgencyMaster.js")"></script>
+}

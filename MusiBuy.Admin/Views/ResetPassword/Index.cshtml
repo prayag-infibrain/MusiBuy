@@ -1,0 +1,93 @@
+﻿@model MusiBuy.Common.Models.ResetPasswordViewModel
+@{
+    ViewData["Title"] = "Reset Password";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MusiBuy  | @ViewData["Title"] </title>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Content("~/images/Icon.png")">
+    <link href="@Url.Content("~/css/login-bundle.min.css")" rel="stylesheet">
+</head>
+<body class="error-page1 main-body bg-light text-dark overflow-hidden">
+    <div id="global-loader">
+        <img src="@Url.Content("~/images/loader.svg")" class="loader-img" alt="Loader">
+    </div>
+    <div class="page">
+        <div class="container-fluid p-0">
+            <div class="row no-gutter m-0">
+                <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex r-image-container p-0">
+                    <div class="r-image-box">
+                        <img src="@Url.Content("~/images/new_banner.jpg")" alt="logo">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-5 bg-white">
+                    <div class="login d-flex align-items-center py-2">
+                        <div class="container p-0">
+                            <div class="row">
+                                <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
+                                    <div class="mb-5 d-flex" style="justify-content:center;">
+                                        @* <a asp-action="home" asp-controller="home"> *@
+                                            <img src="@Url.Content("~/images/logo.png")" class="sign-favicon-a" alt="logo" width="300">
+                                            <img src="@Url.Content("~/images/Icon.png")" class="sign-favicon-b ht-40" alt="logo">
+                                        @* </a> *@
+                                    </div>
+                                    <div class="main-card-signin d-md-flex">
+                                        <div class="wd-100p">
+                                            <div class="main-signin-header">
+                                                <div class="">
+                                                    <h2>Welcome back!</h2>
+                                                    <h4 class="text-start">Reset your password</h4>
+                                                    <form class="form-horizontal" asp-action="Index">
+                                                        <div class="error-box" id="messageLogin" style="display: none;">
+                                                        </div>
+                                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                
+                                                        <div class="form-group text-start">
+                                                            <label>Username </label>
+                                                            <input asp-for="UserName" type="hidden" />
+                                                            <input type="text" value="@Model.UserName" class="form-control" placeholder="User name" disabled />
+                                                        </div> <div class="form-group text-start">
+                                                            <label>Password <span class="text-danger">*</span></label>
+                                                            <input asp-for="OldPassword" type="hidden" />
+                                                            <input asp-for="UserId" type="hidden" />
+                                                            <input asp-for="Password" class="form-control" placeholder="Password" maxlength="20" />
+                                                            <div class="form-control-position">
+                                                                <i class="ft-lock"></i>
+                                                            </div>
+                                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group text-start">
+                                                            <label>Confirm password <span class="text-danger">*</span></label>
+                                                            <input asp-for="ConfirmPassword" class="form-control round" placeholder="Confirm password" maxlength="20" />
+                                                            <div class="form-control-position">
+                                                                <i class="ft-lock"></i>
+                                                            </div>
+                                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                                        </div>
+                                                        <button class="btn ripple btn-main-primary btn-block">Reset Password</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="main-signup-footer mg-t-20">
+                                                <p>Already have an account? <a asp-action="index" asp-controller="home">Sign In</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="@Url.Content("~/js/login-bundle.js")"></script>
+    <script src="@Url.Content("~/js/user-bundle.js")"></script>
+</body>
+</html>

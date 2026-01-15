@@ -1,0 +1,96 @@
+﻿@model MusiBuy.Common.Models.MusicProducersViewModel
+@using MusiBuy.Common.Common
+@{
+    ViewData["Title"] = "Edit Music Producers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Edit Music Producers
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form class="form" asp-action="Edit" id="roleFrm" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="ProducerType">Producer Expertise Name<span class="text-danger">*</span></label>
+                        <input type="text" asp-for="ProducerType" maxlength="100" class="form-control" placeholder="Producer Type">
+                        <span asp-validation-for="ProducerType" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="PrimaryExpertise">PrimaryExpertise<span class="text-danger">*</span></label>
+                        <input type="text" asp-for="PrimaryExpertise" maxlength="100" class="form-control" placeholder="Primary Expertise">
+                        <span asp-validation-for="PrimaryExpertise" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="SortOrder">Sort Order<span class="text-danger">*</span></label>
+                        <input type="number" asp-for="SortOrder" min="0" step="1" class="form-control" placeholder="Sort Order">
+                        <span asp-validation-for="SortOrder" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="GenresSpecialized">Genres Specialized<span class="text-danger">*</span></label>
+                        <input type="text" asp-for="GenresSpecialized" maxlength="100" class="form-control" placeholder="Genres Specialized">
+                        <span asp-validation-for="GenresSpecialized" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="KeyContributions">Key Contributions<span class="text-danger">*</span></label>
+                        <input type="text" asp-for="KeyContributions" maxlength="100" class="form-control" placeholder="Key Contributions">
+                        <span asp-validation-for="KeyContributions" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="IsActive">Status </label>
+                                <div>
+                                    <label>
+                                        <input type="radio" asp-for="IsActive" value="true" /> Active
+                                    </label>
+                                    <label>
+                                        <input type="radio" asp-for="IsActive" value="false" /> Inactive
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="roleBtn">
+                    Update
+                </button>
+                <a asp-action="Index" class="btn btn-custom m-1">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/common/jquery.multiselect.js"></script>
+    <script src="@Url.Content("~/js/custom/MusicProducers.js")"></script>
+}

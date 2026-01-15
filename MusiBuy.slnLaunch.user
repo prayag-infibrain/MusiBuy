@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "MusiBuy.Admin\\MusiBuy.Admin.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "MusiBuy.API\\MusiBuy.API.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

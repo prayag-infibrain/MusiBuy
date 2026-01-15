@@ -1,0 +1,293 @@
+﻿@model MusiBuy.Common.Models.RolePrivilegesViewModel
+@using MusiBuy.Common.Models
+@using MusiBuy.Common.Helpers
+@{
+    ViewData["Title"] = "Role Privileges Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Role Privileges Management
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Index" id="frmRolePrivileges" method="post" class="form-horizontal formstyle">
+            <div class="error-message d-none" id="ErrorMessage">
+            </div>
+            <div>
+                <partial name="_CommonMessages" />
+            </div>
+            <div class="clearfix ptp20">
+                <div class="row mbp15">
+                    <div class="col-sm-6 col-lg-12">
+                        <div class="form-group">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <select asp-for="RoleId" asp-items="Model.Roles" class="form-control borderfix" placeholder="-Select Role-" onchange="getPrivileges(this.value)">
+                                <option>- Select role -</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                @if (SessionManager.GetSession("RolePrivileges") != null && Model.RoleId > 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <div id="grid" class="k-grid">
+                                    <table border="0" cellspacing="1" cellpadding="0" style="border: 1px solid #94C0D2;" class="grid-tab">
+                                        <thead class="k-grid-header">
+                                            <tr class="grid-header-bg">
+                                                <td class="text-bold-700">
+                                                    Menu item
+                                                </td>
+                                                <td class="gridViewHeader text-bold-700" style="text-align:center;">
+                                                    <input type="checkbox" name="chkViewAll" id="chkViewAll" class="chkViewPar11" />
+                                                    View
+                                                </td>
+                                                <td class="gridAddHeader text-bold-700" style="text-align:center;">
+                                                    <input type="checkbox" name="chkAddAll" id="chkAddAll" class="chkViewPar11" />
+                                                    Add
+                                                </td>
+                                                <td class="gridEditHeader text-bold-700" style="text-align:center;">
+                                                    <input type="checkbox" name="chkEditAll" id="chkEditAll" class="chkViewPar11" />
+                                                    Edit
+                                                </td>
+                                                <td class="gridDeleteHeader text-bold-700" style="text-align:center;">
+                                                    <input type="checkbox" name="chkDeleteAll" id="chkDeleteAll" class="chkViewPar11" />
+                                                    Delete
+                                                </td>
+                                                <td class="gridDetailHeader text-bold-700" style="text-align:center;">
+                                                    <input type="checkbox" name="chkDetailAll" id="chkDetailAll" class="chkViewPar11" />
+                                                    Detail
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        @{
+                                            int j = 0;
+                                            List<RolePrivilegesViewModel> dtRolePrivileges = SessionManager.GetSession<List<RolePrivilegesViewModel>>("RolePrivileges");
+
+                                            var parentMenu = dtRolePrivileges.Where(x => !x.MenuItem.ParentId.HasValue).OrderBy(x => x.MenuItem.SortOrder);
+                                            foreach (var item in parentMenu)
+                                            {
+                                                j += 1;
+                                                int ParentId = item.MenuItem.ParentId.HasValue ? item.MenuItem.ParentId.Value : 0;
+                                                string MenuItem = item.MenuItem.MenuItemName;
+                                                string strMenuItemId = Convert.ToString(item.MenuItemId);
+
+                                                var subMenu = dtRolePrivileges.Where(x => x.MenuItem.ParentId == item.MenuItemId).OrderBy(x => x.MenuItem.SortOrder);
+                                                <tr class="@(j % 2 == 0 ? "grid-row" : "k-alt")">
+                                                    <td class="grid-text">
+                                                        @if (ParentId == 0)
+                                                        {
+                                                            <span style="font-weight:bold;">
+                                                                @Html.Encode(MenuItem)
+                                                            </span>
+                                                        }
+                                                        else if (ParentId == 1)
+                                                        {
+                                                            <span style="padding-left: 18px;">
+                                                                @Html.Encode(MenuItem)
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="padding-left: 18px;">
+                                                                @Html.Encode(MenuItem)
+                                                            </span>
+                                                        }
+                                                        <input type="hidden" id="hdMenuItemID" name="hdMenuItemID" value="@Html.Encode(Convert.ToString(item.MenuItemId))" />
+                                                    </td>
+                                                    <td class="grid-text chkView" style="text-align:center;">
+                                                        @if (ParentId > 0)
+                                                        {
+                                                            if (Convert.ToBoolean(item.View))
+                                                            {
+                                                                <input type="checkbox" name="chkView" value="@("v" + Html.Encode(strMenuItemId))" class="@("chkView" + ParentId)" id="@("View_" + Html.Encode(strMenuItemId))"
+                                                       checked="checked" onclick="CheckUncheckAll('View','@Html.Encode(strMenuItemId)','@ParentId')" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="checkbox" name="chkView" value="@("v" + Html.Encode(strMenuItemId))" class="@("chkView" + ParentId)" id="@("View_" + Html.Encode(strMenuItemId))"
+                                                       onclick="CheckUncheckAll('View','@Html.Encode(strMenuItemId)','@ParentId')" />
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.View.HasValue && item.View.Value)
+                                                            {
+                                                                <input type="checkbox" name="chkView" value="@("v" + Html.Encode(strMenuItemId))" id="@Html.Encode(strMenuItemId)" checked="checked" class="@("chkViewPar" + item.MenuItemId)"
+                                                       onclick="javascript:CheckUncheckChildCheckBox(this,'@("chkViewPar" + item.MenuItemId)','@item.MenuItemId');" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="checkbox" name="chkView" value="@("v" + Html.Encode(strMenuItemId))" id="@Html.Encode(strMenuItemId)" class="@("chkViewPar" + item.MenuItemId)"
+                                                       onclick="javascript:CheckUncheckChildCheckBox(this,'@("chkViewPar" + item.MenuItemId)','@item.MenuItemId');" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td class="grid-text chkAdd" style="text-align:center;"></td>
+                                                    <td class="grid-text chkEdit" style="text-align:center;"></td>
+                                                    <td class="grid-text chkDelete" style="text-align:center;"></td>
+                                                    <td class="grid-text chkDetail" style="text-align:center;"></td>
+                                                </tr>
+
+                                                foreach (var subItem in subMenu)
+                                                {
+                                                    j += 1;
+                                                    ParentId = subItem.MenuItem.ParentId.HasValue ? subItem.MenuItem.ParentId.Value : 0;
+                                                    MenuItem = subItem.MenuItem.MenuItemName;
+                                                    strMenuItemId = Convert.ToString(subItem.MenuItemId);
+
+                                                    <tr class="@(j % 2 == 0 ? "grid-row" : "k-alt")">
+                                                        <td class="grid-text">
+                                                            @if (ParentId == 0)
+                                                            {
+                                                                <span style="font-weight:bold;">
+                                                                    @Html.Encode(MenuItem)
+                                                                </span>
+                                                            }
+                                                            else if (ParentId == 1)
+                                                            {
+                                                                <span style="padding-left: 18px;">
+                                                                    @Html.Encode(MenuItem)
+                                                                </span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span style="padding-left: 18px;">
+                                                                    @Html.Encode(MenuItem)
+                                                                </span>
+                                                            }
+                                                            <input type="hidden" id="hdMenuItemID" name="hdMenuItemID" value="@Html.Encode(Convert.ToString(subItem.MenuItemId))" />
+                                                        </td>
+                                                        <td class="grid-text chkView" style="text-align:center;">
+                                                            @if (ParentId > 0)
+                                                            {
+                                                                if (Convert.ToBoolean(subItem.View))
+                                                                {
+                                                                    <input type="checkbox" name="chkView" value="@("v" + Html.Encode(strMenuItemId))" class="@("chkView" + ParentId)" id="@("View_" + Html.Encode(strMenuItemId))"
+                                                       checked="checked" onclick="CheckUncheckAll('View','@Html.Encode(strMenuItemId)','@ParentId')" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="checkbox" name="chkView" value="@("v" + Html.Encode(strMenuItemId))" class="@("chkView" + ParentId)" id="@("View_" + Html.Encode(strMenuItemId))"
+                                                       onclick="CheckUncheckAll('View','@Html.Encode(strMenuItemId)','@ParentId')" />
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                if (subItem.View.HasValue && subItem.View.Value)
+                                                                {
+                                                                    <input type="checkbox" name="chkView" value="@("v" + Html.Encode(strMenuItemId))" id="@Html.Encode(strMenuItemId)" checked="checked" class="@("chkViewPar" + subItem.MenuItemId)"
+                                                       onclick="javascript:CheckUncheckChildCheckBox(this,'@("chkViewPar" + subItem.MenuItemId)','@subItem.MenuItemId');" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="checkbox" name="chkView" value="@("v" + Html.Encode(strMenuItemId))" id="@Html.Encode(strMenuItemId)" class="@("chkViewPar" + subItem.MenuItemId)"
+                                                       onclick="javascript:CheckUncheckChildCheckBox(this,'@("chkViewPar" + subItem.MenuItemId)','@subItem.MenuItemId');" />
+                                                                }
+                                                            }
+                                                        </td>
+                                                        <td class="grid-text chkAdd" style="text-align:center;">
+                                                            @if (ParentId > 0)
+                                                            {
+                                                                if (subItem.Add.HasValue && subItem.Add.Value)
+                                                                {
+                                                                    <input type="checkbox" name="chkAdd" value="@("a" + Html.Encode(strMenuItemId))" class="@("chkAdd" + ParentId)" id="@("Add_" + Html.Encode(strMenuItemId))"
+                                                       checked="checked" onclick="CheckUncheckAll('Add','@Html.Encode(strMenuItemId)','@ParentId')" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="checkbox" name="chkAdd" value="@("a" + Html.Encode(strMenuItemId))" class="@("chkAdd" + ParentId)" id="@("Add_" + Html.Encode(strMenuItemId))"
+                                                       onclick="CheckUncheckAll('Add','@Html.Encode(strMenuItemId)','@ParentId')" />
+                                                                }
+                                                            }
+                                                        </td>
+                                                        <td class="grid-text chkEdit" style="text-align:center;">
+                                                            @if (ParentId > 0)
+                                                            {
+                                                                if (subItem.Edit.HasValue && subItem.Edit.Value)
+                                                                {
+                                                                    <input type="checkbox" name="chkEdit" value="@("e" + Html.Encode(strMenuItemId))" class="@("chkEdit" + ParentId)" id="@("Edit_" + Html.Encode(strMenuItemId))"
+                                                       checked="checked" onclick="CheckUncheckAll('Edit','@Html.Encode(strMenuItemId)','@ParentId')" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="checkbox" name="chkEdit" value="@("e" + Html.Encode(strMenuItemId))" class="@("chkEdit" + ParentId)"
+                                                       id="@("Edit_" + Html.Encode(strMenuItemId))" onclick="CheckUncheckAll('Edit','@strMenuItemId','@ParentId')" />
+                                                                }
+                                                            }
+                                                        </td>
+                                                        <td class="grid-text chkDelete" style="text-align:center;">
+                                                            @if (ParentId > 0)
+                                                            {
+                                                                if (subItem.Delete.HasValue && subItem.Delete.Value)
+                                                                {
+                                                                    <input type="checkbox" name="chkDelete" value="@("d" + Html.Encode(strMenuItemId))" class="@("chkDelete" + ParentId)" id="@("Delete_" + Html.Encode(strMenuItemId))"
+                                                       checked="checked" onclick="CheckUncheckAll('Delete','@strMenuItemId','@ParentId')" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="checkbox" name="chkDelete" value="@("d" + Html.Encode(strMenuItemId))" class="@("chkDelete" + ParentId)" id="@("Delete_" + Html.Encode(strMenuItemId))"
+                                                       onclick="CheckUncheckAll('Delete','@strMenuItemId','@ParentId')" />
+                                                                }
+                                                            }
+                                                        </td>
+                                                        <td class="grid-text chkDetail" style="text-align:center;">
+                                                            @if (ParentId > 0)
+                                                            {
+                                                                if (subItem.Detail.HasValue && subItem.Detail.Value)
+                                                                {
+                                                                    <input type="checkbox" name="chkDetail" value="@("de" + Html.Encode(strMenuItemId))" class="@("chkDetail" + ParentId)" id="@("Detail_" + Html.Encode(strMenuItemId))"
+                                                       checked="checked" onclick="CheckUncheckAll('Detail','@strMenuItemId','@ParentId')" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="checkbox" name="chkDetail" value="@("de" + Html.Encode(strMenuItemId))" class="@("chkDetail" + ParentId)" id="@("Detail_" + Html.Encode(strMenuItemId))"
+                                                       onclick="CheckUncheckAll('Detail','@strMenuItemId','@ParentId')" />
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            @if (SessionManager.GetSession("RolePrivileges") != null && Model.RoleId > 0)
+            {
+                <div class="clearfix ptp20">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-8">
+                                    @if (MusiBuy.Admin.Helper.CurrentAdminSession.HasAddPermission || MusiBuy.Admin.Helper.CurrentAdminSession.HasEditPermission)
+                                    {
+                                        <input name="btnSubmit" type="submit" class="btn btn-primary mt-1" id="btnSubmit" value="Save" />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="@Url.Content("~/js/custom/role-privileges.js")"></script>
+}

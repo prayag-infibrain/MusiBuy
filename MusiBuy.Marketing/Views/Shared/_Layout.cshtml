@@ -1,0 +1,277 @@
+﻿@using MusiBuy.Common.Enumeration
+@using MusiBuy.Marketing.Helper
+@using MusiBuy.Common.Common
+@using MusiBuy.Common.Models
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+	var readPath = Configuration.GetValue<string>("FilePath:FileReadPath");
+	var filePath = Configuration.GetValue<string>("FilePath:FilePath");
+	var profileImagePath = readPath + "/" + GlobalCode.ProfileImagePath;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link href="~/css/common/style.css" rel="stylesheet" />
+	<!-- Title -->
+	<title>MusiBuy |  @ViewData["Title"] </title>
+	<link rel="icon" href="@Url.Content("~/images/Icon.png")" type="image/x-icon" />
+	<link href="@Url.Content("~/css/layout-bundle.css")" rel="stylesheet" />
+	<script src="@Url.Content("~/js/jquery-bundle.min.js")"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+<body class="main-body app sidebar-mini">
+	<div id="global-loader">
+		<img src="@Url.Content("~/images/loader.svg")" class="loader-img" alt="Loader">
+	</div>
+	<div class="page">
+		<div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+		<aside class="app-sidebar sidebar-scroll">
+			<div class="main-sidebar-header active">
+				<a class="desktop-logo logo-light active" asp-action="home" asp-controller="home"><img src="@Url.Content("~/images/logo-Slider.png")" class="main-logo main-icon" alt="logo"></a>
+				<a class="desktop-logo logo-dark active" asp-action="home" asp-controller="home"><img src="@Url.Content("~/images/secondary-logo.png")" class="main-logo dark-theme" alt="logo"></a>
+				<a class="logo-icon mobile-logo icon-light active" asp-action="home" asp-controller="home"><img style="margin-top:7px" src="@Url.Content("~/images/Icon.png")" class="logo-icon" alt="logo"></a>
+				<a class="logo-icon mobile-logo icon-dark active" asp-action="home" asp-controller="home"><img src="@Url.Content("~/images/Icon.png")" class="logo-icon dark-theme" alt="logo"></a>
+			</div>
+			<div class="main-sidemenu">
+				<ul class="side-menu">
+					<li class="slide">
+						<a class="side-menu__item" href="@Url.Action("Home","Home")">
+							<i class="fe fe-home side-menu__icon"></i><span class="side-menu__label">Dashboard</span>
+						</a>
+					</li>
+
+					<li class="slide">
+						<a class="side-menu__item" data-bs-toggle="slide" href="#">
+							<i class="fe fe-airplay side-menu__icon"></i><span class="side-menu__label">Creation Studio </span><i class="angle fe fe-chevron-down text-dark"></i>
+						</a>
+						<ul class="slide-menu">
+							<li>
+								<a class="slide-item" asp-action="Index" asp-controller="PostManagement">
+									Post Management
+								</a>
+							</li>
+						</ul>
+						@* <ul class="slide-menu">
+							<li>
+								<a class="slide-item" asp-action="" asp-controller="">
+									Campaign Management
+								</a>
+							</li>
+						</ul> *@
+					</li>
+
+					@* <li class="slide">
+						<a class="side-menu__item" href="@Url.Action("Index","PostManagement")">
+							<i class="fe fe-users side-menu__icon"></i><span class="side-menu__label">Catalog Management</span>
+						</a>
+					</li> *@
+
+					<li class="slide">
+						<a class="side-menu__item" data-bs-toggle="slide" href="#">
+							<i class="fe fe-grid side-menu__icon"></i><span class="side-menu__label"> Revenue Hub </span><i class="angle fe fe-chevron-down text-dark"></i>
+						</a>
+						<ul class="slide-menu">
+							<li>
+								<a class="slide-item" asp-action="Index" asp-controller="TransactionsHistory">
+									Wallet Management
+								</a>
+							</li>
+						</ul>
+						<ul class="slide-menu">
+							<li>
+								<a class="slide-item" asp-action="Index" asp-controller="TokenPlan">
+									Subscription Plan
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					@* @if (CurrentUserSession.RoleID == (int)MarketingUserTypeEnum.Publishers)
+					{
+
+					}
+					else
+					{
+
+					} *@
+
+					@* @{
+						var mainMenu = CurrentUserSession.ViewRoleMenus.ViewRoleMenu.Where(x => (!x.ParentId.HasValue || x.ParentId.Value == 0)).ToList();
+						var subMenu = CurrentUserSession.ViewRoleMenus.ViewRoleMenu.Where(x => x.ParentId.HasValue && x.ParentId.Value > 0).ToList();
+						var mainmenuWithController = CurrentUserSession.ViewRoleMenus.ViewRoleMenu.Where(x => (!x.ParentId.HasValue || x.ParentId.Value == 0) && !string.IsNullOrWhiteSpace(x.MenuItemController)).ToList();
+						var Allmenu = CurrentUserSession.ViewRoleMenus.ViewRoleMenu.ToList();
+					}
+
+					@foreach (MenuItemViewModel dtMainItem in Allmenu)
+					{
+						if (dtMainItem.ParentId == null && !dtMainItem.ParentId.HasValue && !string.IsNullOrWhiteSpace(dtMainItem.MenuItemController))
+						{
+							<li class="slide">
+								<a class="side-menu__item" data-bs-toggle="slide" asp-action="@dtMainItem.MenuItemView" asp-controller="@dtMainItem.MenuItemController">
+									<i class="@Html.Encode(Convert.ToString(dtMainItem.ImageName)) side-menu__icon"></i><span class="side-menu__label">@Html.Encode(Convert.ToString(dtMainItem.MenuItemName))</span>
+								</a>
+							</li>
+						}
+						else
+						{
+							if (dtMainItem.ParentId == null && !dtMainItem.ParentId.HasValue)
+							{
+								<li class="slide">
+									<a class="side-menu__item" data-bs-toggle="slide" href="#">
+										<i class="@Html.Encode(Convert.ToString(dtMainItem.ImageName)) side-menu__icon"></i><span class="side-menu__label">@Html.Encode(Convert.ToString(dtMainItem.MenuItemName))</span><i class="angle fe fe-chevron-down text-dark"></i>
+									</a>
+									<ul class="slide-menu">
+										@foreach (var dtMenuItemSecond in subMenu)
+										{
+											if (dtMenuItemSecond.ParentId == dtMainItem.Id)
+											{
+												<li>
+													<a class="slide-item" asp-action="@dtMenuItemSecond.MenuItemView" asp-controller="@dtMenuItemSecond.MenuItemController">
+														@Html.Encode(Convert.ToString(dtMenuItemSecond.MenuItemName))
+
+													</a>
+												</li>
+											}
+										}
+									</ul>
+								</li>
+							}
+						}
+					} *@
+				</ul>
+			</div>
+		</aside>
+		<div class="main-content app-content">
+			<div class="main-header sticky side-header nav nav-item">
+				<div class="container-fluid">
+					<div class="main-header-left ">
+						<div class="responsive-logo">
+							<a asp-action="home" asp-controller="home">
+								<img src="@Url.Content("~/images/logo.png")" class="logo-1" alt="logo">
+							</a>
+							<a asp-action="home" asp-controller="home">
+								<img src="@Url.Content("~/images/secondary-logo.png")" class="dark-logo-1" alt="logo">
+							</a>
+							<a asp-action="home" asp-controller="home">
+								<img src="@Url.Content("~/images/Icon.png")" class="logo-2" alt="logo">
+							</a>
+							<a asp-action="home" asp-controller="home">
+								<img src="@Url.Content("~/images/Icon.png")" class="dark-logo-2" alt="logo">
+							</a>
+						</div>
+						<div class="app-sidebar__toggle" data-bs-toggle="sidebar">
+							<a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
+							<a class="close-toggle" href="#"><i class="header-icons fe fe-x"></i></a>
+						</div>
+					</div>
+					<div class="main-header-right">
+						<ul class="nav nav-item  navbar-nav-right ms-auto">
+							<li class="nav-item full-screen fullscreen-button">
+								<a class="new nav-link full-screen-link" href="#">
+									<svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
+										 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+										 stroke-linejoin="round" class="feather feather-maximize">
+										<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+										</path>
+									</svg>
+								</a>
+							</li>
+							<li class="dropdown main-profile-menu nav nav-item nav-link">
+								<a class="profile-user d-flex" href="">
+									<img src="@Url.Action("SvgAvatar", "Home", new { userName = CurrentUserSession.User.FirstName +" "+ CurrentUserSession.User.LastName })" alt="User Avatar" />
+									@* <img alt="" src="@Url.Content("~/images/user.png")"> *@
+								</a>
+								<div class="dropdown-menu">
+									<div class="main-header-profile bg-primary p-3">
+										<div class="d-flex wd-100p justify-content-center">
+											<div class="ms-3 my-auto">
+												<h6>@CurrentUserSession.User.FirstName @CurrentUserSession.User.LastName</h6>
+											</div>
+										</div>
+									</div>
+									<a class="dropdown-item" asp-controller="ChangeProfile" asp-action="Index"><i class="fe fe-edit-3"></i> Edit Profile</a>
+									<a class="dropdown-item" asp-controller="ChangePassword" asp-action="Index"><i class="bx bx-key"></i> Change Password</a>
+									<a class="dropdown-item" asp-action="Logout" asp-controller="Home">
+										<i class="bx bx-log-out"></i> Sign Out
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid">
+				@RenderBody()
+			</div>
+		</div>
+		<div class="modal fade" id="loader" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+			<div class="modal-dialog max-width100">
+				<div class="modal-body time-slot-body well-guide pt-0 mt-2 mb-2" id="emailContainer">
+					<div class="modal-content rounded-0">
+
+						<div id="">
+							<img src="@Url.Content("~/images/loader.svg")" class="loader-img" alt="Loader">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-footer ht-40">
+			<div class="container-fluid pd-t-0-f ht-100p">
+				<span>Copyright © @DateTime.UtcNow.Year <a asp-action="home" asp-controller="home">MusiBuy</a>. </span>
+			</div>
+		</div>
+	</div>
+	<script src="@Url.Content("~/js/layout-bundle.js")"></script>
+	<div class="col-md-12">
+		<div id="display-message">
+			<partial name="_CommonMessages" />
+		</div>
+	</div>
+
+	<div class="modal fade" id="showDescriptionModal" tabindex="-1" aria-labelledby="showDescriptionModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-l">
+			<div class="modal-content">
+				<div class="modal-header calc-modal-header" style="background-color:#10D0A1">
+					<span class="modal-title fs-5 text-light" id="showDescriptionModalLabel"></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" data-bs-dismiss="modal" class="cursor-pointer" aria-label="Close" viewBox="0 0 20 20" fill="none">
+						<g clip-path="url(#clip0_176_2186)">
+							<path d="M0.976089 19.0001C0.782917 19.0002 0.594073 18.9429 0.433445 18.8356C0.272816 18.7283 0.14762 18.5758 0.0736909 18.3973C-0.000237801 18.2188 -0.0195773 18.0225 0.0181186 17.833C0.0558146 17.6435 0.148852 17.4695 0.285464 17.3329L18.3323 -0.713934C18.5155 -0.897099 18.7639 -1 19.023 -1C19.282 -1 19.5304 -0.897099 19.7136 -0.713934C19.8968 -0.530769 19.9997 -0.282343 19.9997 -0.0233088C19.9997 0.235726 19.8968 0.484151 19.7136 0.667316L1.66671 18.7142C1.5761 18.805 1.46845 18.877 1.34993 18.9261C1.23141 18.9751 1.10436 19.0003 0.976089 19.0001Z" fill="white" />
+							<path d="M19.0231 19.0001C18.8948 19.0003 18.7678 18.9751 18.6493 18.9261C18.5307 18.877 18.4231 18.805 18.3325 18.7142L0.285601 0.667316C0.102436 0.484151 -0.000465393 0.235726 -0.000465393 -0.0233088C-0.000465393 -0.282343 0.102436 -0.530769 0.285601 -0.713934C0.468766 -0.897099 0.717191 -1 0.976226 -1C1.23526 -1 1.48369 -0.897099 1.66685 -0.713934L19.7137 17.3329C19.8503 17.4695 19.9434 17.6435 19.9811 17.833C20.0188 18.0225 19.9994 18.2188 19.9255 18.3973C19.8516 18.5758 19.7264 18.7283 19.5657 18.8356C19.4051 18.9429 19.2163 19.0002 19.0231 19.0001Z" fill="white" />
+						</g>
+						<defs>
+							<clipPath id="clip0_176_2186">
+								<rect width="20" height="20" fill="black" />
+							</clipPath>
+						</defs>
+					</svg>
+				</div>
+				<div class="modal-body">
+					<form id="showDescription">
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="mb-3 position-relative">
+
+
+									<textarea class="form-control mt-2" tabindex="1" maxlength="150" id="descriptionTxt" placeholder="Description" rows="5" readonly></textarea>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	@RenderSection("Scripts", false)
+</body>
+</html>

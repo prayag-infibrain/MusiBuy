@@ -1,0 +1,97 @@
+﻿@model MusiBuy.Common.Models.TemplateViewModel
+@using Kendo.Mvc.UI
+@using MusiBuy.Common.Common;
+@using MusiBuy.Admin.Helper;
+@{
+    ViewData["Title"] = "Email Template Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/kendo/kendo.min.js")"></script>
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Email Template Management
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header border-0 pt-6">
+        <div class="col-md-12">
+            <div id="display-message">
+                <partial name="_CommonMessages" />
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="card-title mb-0">
+                    <div class="d-flex align-items-center position-relative c-searchbar my-1">
+                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+                            </svg>
+                        </span>
+                        <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14 me-4 searchName" id="txtTNSearch" placeholder="Search template" onkeyup="Search()" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card-toolbar">
+                    <div class="d-flex justify-content-end">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body pt-0">
+        <div id="kt_table_users_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="table-responsive">
+                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_table_users">
+                    @(Html.Kendo().Grid<MusiBuy.Common.Models.TemplateViewModel>()
+                        .Name("grid")
+                        .Events(e => e.DataBound("onGridDataBound"))
+                        .Columns(columns =>
+                        {
+                            if (CurrentAdminSession.HasEditPermission)
+                            {
+                                columns.Bound(x => x.Id).ClientHeaderTemplate(" ").ClientTemplate("<a href='" + Url.Action("Edit", "Template", new { id = "#= Id #" }) + "'" + " class='grid-btn-edit', title = 'Edit'><span class='fe fe-edit'></span></a>").HeaderHtmlAttributes(new { @class = "textalign" }).Filterable(false).Sortable(false).Groupable(false);
+
+                                columns.Bound(x => x.Id).ClientHeaderTemplate(" ").ClientTemplate("# if(TemplateName != 'Forgot password') { # " + "<a href='" + Url.Action("Index", "Recipient", new { id = "#= Id #" }) + "'" + " class='grid-btn-managebuyer' title='Manage Recipient'><span class='fe fe-user'></span></a>" + "#} #").HeaderHtmlAttributes(new { @class = "textalign" }).Filterable(false).Sortable(false).Groupable(false);
+                            }
+                            if (CurrentAdminSession.HasDetailPermission)
+                            {
+                                columns.Bound(u => u.TemplateName).ClientTemplate("<a href='" + Url.Action("Detail", "Template", new { id = "#= Id #" }) + "' " + " title='Detail' class='text-gray-800 text-hover-primary mb-1'>#= TemplateName #</a>").Title("Template name").Width("50%");
+                            }
+                            else
+                            {
+                                columns.Bound(u => u.TemplateName).Title("Template name").Width("50%");
+                            }
+                            columns.Bound(a => a.Active).Title("Status").Width("50%");
+                        })
+                        .Pageable(pageable => pageable.Refresh(true)
+                        .PageSizes(GlobalCode.RecordPerPageList)
+                        .ButtonCount(GlobalCode.ButtonCount)
+                        .Input(true).Numeric(true))
+                        .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .PageSize(GlobalCode.PageSize)
+                        .Read(read => read.Action("Template_Read", "Template").Data("FilterData")))
+                        .Sortable()
+                        .Filterable(f => f.Extra(false))
+                        .Groupable(false)
+                        .EnableCustomBinding(true)
+                        )
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/js/custom/template.js")"></script>
+}

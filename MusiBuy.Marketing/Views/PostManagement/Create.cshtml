@@ -1,0 +1,125 @@
+﻿@model MusiBuy.Common.Models.PostManagementViewModel
+@using MusiBuy.Common.Common
+@using MusiBuy.Common.Enumeration
+@{
+	ViewData["Title"] = "Create Post";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+	<div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+		<div class="breadcrumb-header justify-content-between">
+			<div class="left-content">
+				<h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+					Create Post
+					<small class="text-muted fs-6 fw-normal ms-1"></small>
+				</h1>
+				<partial name="_BreadCrumb" />
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card">
+	<div class="card-body">
+		<form asp-action="Create" method="post" class="form-horizontal formstyle" id="frmUser" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div id="display-messages"></div>
+			<input asp-for="Id" type="hidden" />
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="CreatorId">Creator<span class="text-danger">*</span></label>
+						<select asp-for="CreatorId" asp-items="Model.SelectCreator" class="form-control borderfix">
+							<option value="" selected="selected">- Select Creator -</option>
+						</select>
+						<span asp-validation-for="CreatorId" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="Title">Title <span class="text-danger">*</span></label>
+						<input asp-for="Title" maxlength="50" class="form-control" placeholder="Title" />
+						<span asp-validation-for="Title" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-4">
+					<div class="form-group">
+						<label asp-for="TypeId">Type<span class="text-danger">*</span></label>
+						<select asp-for="TypeId" asp-items="Model.SelectType" class="form-control borderfix" onchange="setAccept()">
+							<option value="" selected="selected">- Select Type -</option>
+						</select>
+						<span asp-validation-for="TypeId" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-4">
+					<div class="form-group">
+						<label asp-for="MediaFile">Media File <span class="text-danger">*</span></label>
+						<input type="file" asp-for="MediaFile" name="MediaFile" class="form-control" />
+						<span asp-validation-for="MediaFile" class="text-danger"></span>
+
+					</div>
+					<div id="image-preview" style="position:relative; margin-top:10px; display:none;">
+						<img id="image-preview-img"
+							 src="#"
+							 alt="Preview"
+							 style="max-width:200px; max-height:200px; display:block; border:1px solid #ccc; padding:4px;" />
+						<button type="button"
+								id="remove-image"
+								style="position:absolute; top:0; background:rgba(0,0,0,0.6); color:#fff; border:none; border-radius:50%; width:24px; height:24px; line-height:20px; text-align:center; cursor:pointer;">
+							×
+						</button>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-4">
+					<div class="form-group">
+						<label asp-for="Url">URL <span class="text-danger">*</span></label>
+						<input asp-for="Url" class="form-control" placeholder="URL" />
+						<span asp-validation-for="Url" class="text-danger"></span>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+					<div class="form-group">
+						<label asp-for="Description">Description </label>
+						<textarea asp-for="Description" class="form-control" placeholder="Description..."></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+					<div class="form-group">
+						<label asp-for="Tags">Tags </label>
+						@* <input type="text" name="Tags" id="Tags" class="form-control" data-role="tagsinput" placeholder="#Musiby..." /> *@
+						<input type="text" name="Tags" asp-for="Tags" class="form-control" data-role="tagsinput" placeholder="#Musiby..." />
+					</div>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button name="btnSubmit" type="submit" class="btn btn-primary" id="btnSubmit" value="Save">
+					Save
+				</button>
+				<a asp-action="Index" class="btn btn-custom m-1">Back</a>
+			</div>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	<script src="@Url.Content("~/js/user-bundle.js")"></script>
+
+	<style>
+		.bootstrap-tagsinput {
+			width: 100%;
+		}
+	</style>
+	<link href="~/css/custom/bootstrap-tagsinput.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+	<script src="~/js/custom/postmanagement.js"></script>
+}

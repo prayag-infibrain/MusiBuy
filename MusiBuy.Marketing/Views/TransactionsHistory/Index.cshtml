@@ -1,0 +1,108 @@
+﻿@model MusiBuy.Common.Models.TransactionsHistory
+@using MusiBuy.Marketing.Helper
+@using MusiBuy.Common.Common
+@using Kendo.Mvc.UI
+@{
+	ViewBag.Title = "Latest Transactions";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/kendo/kendo.min.js")"></script>
+
+<div class="toolbar" id="kt_toolbar">
+	<div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+		<div class="breadcrumb-header justify-content-between">
+			<div class="left-content">
+				<h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+					Transactions
+					<small class="text-muted fs-6 fw-normal ms-1"></small>
+				</h1>
+				<partial name="_BreadCrumb" />
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="card">
+	<div class="card-header border-0 pt-6">
+		<div class="col-md-12">
+			<div id="display-message">
+				<partial name="_CommonMessages" />
+			</div>
+		</div>
+		<div class="row align-items-center">
+			<div class="col-lg-6">
+				<div class="card-title mb-0">
+					<div class="d-flex align-items-center position-relative c-searchbar my-1">
+						<span class="svg-icon svg-icon-1 position-absolute ms-6">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+								<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+								<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+							</svg>
+						</span>
+						<input type="text" id="txtSearch" placeholder="Search" class="form-control form-control-solid w-250px ps-14 me-4 searchName" maxlength="50" onkeyup="Search()" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form asp-action="Delete" method="post" onkeydown="return event.key != 'Enter';" class="form-horizontal formstyle">
+	<div class="card-body pt-0">
+		<div id="kt_table_users_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+			<div class="table-responsive">
+				<table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_table_users">
+					@(Html.Kendo().Grid<MusiBuy.Common.Models.TransactionsHistory>()
+												.Name("grid")
+												.Events(e => e.DataBound("onGridDataBound"))
+												.Columns(columns =>
+												{
+													columns.Bound(history => history.Username).Title("User").Width("15%");
+													columns.Bound(history => history.TokenTypeName).Title("Token Type").Width("15%");
+													columns.Bound(history => history.Amount).Title("Amount").Width("5%");
+													columns.Bound(history => history.Quantity).Title("Quantity").Width("5%");
+														columns.Bound(history => history.PaidDate).Title("Paid At").Width("20%").Format("{0:dd/MM/yyyy hh:mm tt}");
+													columns.Bound(history => history.ReferenceId).Title("Ref. Id").Width("20%");
+													columns.Bound(history => history.Status).Title("Status").Width("5%");
+												})
+												.Pageable(pageable => pageable.Refresh(true)
+												.PageSizes(GlobalCode.RecordPerPageList)
+												.ButtonCount(GlobalCode.ButtonCount)
+												.Input(true).Numeric(true))
+												.Groupable(false)
+												.Filterable(f => f.Extra(false))
+												.Sortable()
+												.DataSource(dataSource => dataSource
+												.Ajax()
+												.Read(read => read.Action("_AjaxBinding", "TransactionsHistory").Data("FilterData"))
+												)
+												.EnableCustomBinding(false)
+												)
+				</table>
+			</div>
+		</div>
+	</div>
+	 </form> 
+</div>
+
+@section Scripts {
+	<script>
+						$(function () {
+			$("#grid table").addClass("table-responsive").addClass("tablestyle");
+		});
+
+		function Search() {
+			debugger
+			$('#grid').data('kendoGrid').dataSource.page(1);
+			$('#grid').data('kendoGrid').dataSource.read();
+			$('#grid').data('kendoGrid').refresh();
+		}
+
+		function FilterData() {
+			return {
+				searchValue: $("#txtSearch").val()
+			};
+		}
+	</script>
+@* <script src="@Url.Content("~/js/common/jquery.maskedinput.min.js")"></script>
+	    <script src="@Url.Content("~/js/custom/user.js")"></script> *@
+}

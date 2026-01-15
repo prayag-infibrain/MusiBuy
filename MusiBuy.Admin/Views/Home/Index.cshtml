@@ -1,0 +1,87 @@
+﻿@model MusiBuy.Common.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+    
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MusiBuy | @ViewData["Title"] </title>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="MusiBuy ">
+    <meta name="Author" content="Infibrain Technologies LLP">
+    <meta name="Keywords" content="" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Content("~/images/icon.png")">
+    <link href="@Url.Content("~/css/login-bundle.min.css")" rel="stylesheet">
+</head>
+<body class="error-page1 main-body bg-light text-dark overflow-hidden">
+    <div id="global-loader">
+        <img src="@Url.Content("~/images/loader.svg")" class="loader-img" alt="Loader">
+    </div>
+    <div class="page">
+        <div class="container-fluid p-0">
+            <div class="row no-gutter m-0">
+                <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex r-image-container p-0">
+                    <div class="r-image-box">
+                        <img src="@Url.Content("~/images/new_banner.jpg")" alt="banner image">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-5 bg-white">
+                    <div class="login d-flex align-items-center py-2">
+                        <div class="container p-0">
+                            <div class="row">
+                                <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
+                                    <div class="card-sigin">
+                                        <div class="mb-5 d-flex" style="justify-content:center;">
+                                           
+                                            <img src="@Url.Content("~/images/logo.png")" alt="logo" width="70%">
+
+                                        </div>
+                                        
+                                        <div class="card-sigin">
+                                            <div class="main-signup-header">
+                                                <h2>Welcome back!</h2>
+                                                <h5 class="fw-semibold mb-4">Please sign in to continue.</h5>
+                                                <form class="form w-100" autocomplete="off" asp-controller="Home" asp-action="Index" method="post">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <div class="form-group">
+                                                        <div class="d-flex flex-stack mb-2">
+                                                            <label class="form-label fw-bolder text-dark fs-6 mb-0">Username <span class="text-danger">*</span></label>
+                                                        </div>
+                                                        <input type="text" asp-for="UserName" class="form-control form-control-lg form-control-solid" placeholder="Username" maxlength="50" tabindex="1" />
+                                                        <span asp-validation-for="UserName" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="d-flex flex-stack mb-2">
+                                                            <label class="form-label fw-bolder text-dark fs-6 mb-0">Password <span class="text-danger">*</span></label>
+                                                        </div>
+                                                        <input type="password" asp-for="Password" class="form-control form-control-lg form-control-solid" placeholder="Password " maxlength="20" tabindex="2" />
+                                                        <span toggle="#Password" class="field-icon toggle-password me-3 fa fa-eye  "></span>
+                                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                                    </div>
+                                                    <button class="btn btn-main-primary btn-block">Sign In</button>
+                                                </form>
+                                                <div class="main-signin-footer mt-3">
+                                                    <p><a asp-action="Index" asp-controller="ForgotPassword" class="link-primary fs-6 fw-bolder">Forgot Password ?</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="@Url.Content("~/js/login-bundle.js")"></script>
+    <div>
+        <partial name="_CommonMessages" />
+    </div>
+</body>
+</html>

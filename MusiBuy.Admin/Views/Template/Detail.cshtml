@@ -1,0 +1,65 @@
+﻿@model MusiBuy.Common.Models.TemplateViewModel
+@{
+    ViewData["Title"] = " Email Template Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Email Template Detail
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body pb-0">
+        <form class="form-horizontal formstyle">
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="TemplateName" class="col-sm-12 col-lg-4 control-label">Template name :</label>
+                        @Html.Encode(Model.TemplateName)
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                    <div class="form-group">
+                        <label asp-for="Subject" class="col-sm-12 col-lg-4 control-label">Subject :</label>
+                        @Html.Encode(Model.Subject)
+                    </div>
+                </div>
+            </div>           
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="form-group">
+                        <label asp-for="TemplateContent" class="col-sm-12 col-lg-4 control-label">Content :</label>
+                        @Html.Raw(Model.TemplateContent)
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="Active" class="col-sm-12 col-lg-4 control-label">Status :</label>
+                        @Html.Encode(Model.Active)
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-8 col-lg-offset-4">
+                            <a asp-action="index" asp-controller="template" title="Back" class="btn btn-custom mb-2" id="hrefBack">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

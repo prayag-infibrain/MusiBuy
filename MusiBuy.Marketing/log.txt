@@ -1,0 +1,7 @@
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at MusiBuy.Common.Repositories.StripeTokenRepository.CreateTokenCheckoutSession(Int32 planId, Int32 UserId) in C:\SVN\MusiBuy\trunk\MusiBuy.Common\Repositories\StripeTokenRepository.cs:line 23
+   at MusiBuy.Marketing.Controllers.PaymentController.CreateCheckoutSession(CheckoutRequest request1)System.NullReferenceException: Object reference not set to an instance of an object.
+   at MusiBuy.Common.Repositories.StripeTokenRepository.CreateTokenCheckoutSession(Int32 planId, Int32 UserId) in C:\SVN\MusiBuy\trunk\MusiBuy.Common\Repositories\StripeTokenRepository.cs:line 23
+   at MusiBuy.Marketing.Controllers.PaymentController.CreateCheckoutSession(CheckoutRequest request)System.NullReferenceException: Object reference not set to an instance of an object.
+   at MusiBuy.Common.Repositories.StripeTokenRepository.CreateTokenCheckoutSession(Int32 planId, Int32 UserId)
+   at MusiBuy.Marketing.Controllers.PaymentController.CreateCheckoutSession(CheckoutRequest request) in C:\SVN\MusiBuy\trunk\MusiBuy.Marketing\Controllers\PaymentController.cs:line 36

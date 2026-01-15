@@ -1,0 +1,3 @@
+﻿$(function () { $("#Password").keyup(function () { $("#result").html(passwordStrength($("#Password").val(), "UserName")); document.getElementById("result").style.color = $("#result").html() == "&nbsp;&nbsp;Too short" || $("#result").html() == "&nbsp;&nbsp;Average" ? "red" : "green" }) })
+
+$(function () { $("#MasterPassword").keyup(function () { $("#result").html(passwordStrength($("#MasterPassword").val(), "UserName")); document.getElementById("result").style.color = $("#result").html() == "&nbsp;&nbsp;Too short" || $("#result").html() == "&nbsp;&nbsp;Average" ? "red" : "green" }) })

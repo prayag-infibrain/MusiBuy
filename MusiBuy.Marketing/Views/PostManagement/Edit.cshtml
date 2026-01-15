@@ -1,0 +1,195 @@
+﻿@model MusiBuy.Common.Models.PostManagementViewModel
+@using MusiBuy.Common.Common
+@using MusiBuy.Common.Enumeration
+@{
+	ViewData["Title"] = "Edit Post";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+	string mimeType = "";
+	if (!string.IsNullOrEmpty(Model.StrMediaFile))
+	{
+		string extension = System.IO.Path.GetExtension(Model.StrMediaFile).ToLower();
+		if (Model.TypeId == (int)PostMediaTypeEnum.Audio)
+		{
+			mimeType = "audio/mpeg"; // default
+			switch (extension)
+			{
+				case ".wav": mimeType = "audio/wav"; break;
+				case ".aiff": mimeType = "audio/aiff"; break;
+				case ".flac": mimeType = "audio/flac"; break;
+				case ".aac": mimeType = "audio/aac"; break;
+				case ".wma": mimeType = "audio/x-ms-wma"; break;
+				case ".m4a": mimeType = "audio/mp4"; break;
+				case ".mp3": mimeType = "audio/mpeg"; break;
+				default: mimeType = "audio/*"; break;
+			}
+		}
+		else if (Model.TypeId == (int)PostMediaTypeEnum.Audio)
+		{
+			mimeType = "video/mp4"; // default fallback
+			switch (extension)
+			{
+				case ".webm": mimeType = "video/webm"; break;
+				case ".ogg": mimeType = "video/ogg"; break;
+				case ".mov": mimeType = "video/quicktime"; break;
+				case ".avi": mimeType = "video/x-msvideo"; break;
+				case ".wmv": mimeType = "video/x-ms-wmv"; break;
+				case ".mkv": mimeType = "video/x-matroska"; break;
+				case ".mp4": mimeType = "video/mp4"; break;
+			}
+		}
+	}
+}
+<div class="toolbar" id="kt_toolbar">
+	<div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+		<div class="breadcrumb-header justify-content-between">
+			<div class="left-content">
+				<h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+					Edit Post
+					<small class="text-muted fs-6 fw-normal ms-1"></small>
+				</h1>
+				<partial name="_BreadCrumb" />
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card">
+	<div class="card-body">
+		<form asp-action="Edit" method="post" class="form-horizontal formstyle" id="frmUserEdit" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div id="display-messages"></div>
+			<input asp-for="Id" type="hidden" />
+			<input asp-for="StatusId" type="hidden" />
+			<input asp-for="PublishDate" type="hidden" />
+			<input asp-for="MediaFileName" type="hidden" />
+			<label id="AllowAudioFileExt" name="AllowAudioFileExt" style="display:none;"> @Html.Raw(Json.Serialize(GlobalCode.AllowAudioFileExt.Select(ext => ext.ToLower()).Distinct()))"</label>
+			<label id="AllowVideoFileExt" name="AllowVideoFileExt" style="display:none;">@Html.Raw(Json.Serialize(GlobalCode.AllowVideoFileExt.Select(ext => ext.ToLower()).Distinct()))"</label>
+			<label id="AllowImgFileExt" name="AllowImgFileExt" style="display:none;">@Html.Raw(Json.Serialize(GlobalCode.AllowImgFileExt.Select(ext => ext.ToLower()).Distinct()))</label>
+			<label id="AllowTextFileExt" name="AllowTextFileExt" style="display:none;">@Html.Raw(Json.Serialize(GlobalCode.AllowTextFileExt.Select(ext => ext.ToLower()).Distinct()))</label>
+			<label id="maxSizeMB" name="maxSizeMB" style="display:none;">@GlobalCode.ImageSize</label>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="CreatorId">Creator<span class="text-danger">*</span></label>
+						<select asp-for="CreatorId" asp-items="Model.SelectCreator" class="form-control borderfix">
+							<option value="" selected="selected">- Select Creator -</option>
+						</select>
+						<span asp-validation-for="CreatorId" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="Title">Title <span class="text-danger">*</span></label>
+						<input asp-for="Title" maxlength="50" class="form-control" placeholder="Title" />
+						<span asp-validation-for="Title" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-4">
+					<div class="form-group">
+						<label asp-for="TypeId">Type<span class="text-danger">*</span></label>
+						<select asp-for="TypeId" asp-items="Model.SelectType" class="form-control borderfix" onchange="setAccept()">
+							<option value="" selected="selected">- Select Type -</option>
+						</select>
+						<span asp-validation-for="TypeId" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-4">
+					<div class="form-group">
+						<label asp-for="MediaFile">Media File <span class="text-danger">*</span></label>
+						<input type="file" asp-for="MediaFile" name="MediaFile" class="form-control" />
+						<span asp-validation-for="MediaFile" class="text-danger"></span>
+						<input type="hidden" asp-for="@Model.StrMediaFile" />
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-4">
+					<div class="form-group">
+						<label asp-for="Url">URL <span class="text-danger">*</span></label>
+						<input asp-for="Url" class="form-control" placeholder="URL" />
+						<span asp-validation-for="Url" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+					<div class="form-group">
+						@if (Model.StrMediaFile != null)
+						{
+							<div id="MediaFile-preview" style="position:relative; margin-top:10px;">
+								@if (Model.TypeId == (int)PostMediaTypeEnum.Audio)
+								{
+									<audio controls>
+										<source src="@Model.StrMediaFile" type="@mimeType" style="max-width:400px; max-height:400px;" />
+									</audio>
+								}
+								else if (Model.TypeId == (int)PostMediaTypeEnum.Image)
+								{
+									<img id="image-preview-img"
+										 src="@(Model.StrMediaFile != null ? Url.Content(Model.StrMediaFile) : "#")"
+										 alt="Preview"
+										 style="max-width:400px; max-height:400px; display:block; border:1px solid #ccc; padding:4px;" />
+								}
+								else if (Model.TypeId == (int)PostMediaTypeEnum.Video)
+								{
+									<video width="640" height="360" controls>
+										<source src="@Url.Content(Model.StrMediaFile)" type="@mimeType" style="max-width:400px; max-height:400px;" />
+										Your browser does not support the video tag.
+									</video>
+								}
+								else if (Model.TypeId == (int)PostMediaTypeEnum.Text)
+								{
+									<label id="StrMediaFileFortxt" name="StrMediaFileFortxt" style="display:none;">@Model.StrMediaFile</label>
+									<pre id="preview" style="max-height: 400px !important;">Loading...</pre>
+								}
+								<button type="button"
+										id="remove-file"
+										style="position:absolute; top:0; background:rgba(0,0,0,0.6); color:#fff; border:none; border-radius:50%; width:24px; height:24px; line-height:20px; text-align:center; cursor:pointer;">
+									×
+								</button>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+					<div class="form-group">
+						<label asp-for="Description">Description </label>
+						<textarea asp-for="Description" class="form-control" placeholder="Description..."></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+					<div class="form-group">
+						<label asp-for="Tags">Tags </label>
+						@* <input type="text" asp-for="Tags" name="Tags"  class="form-control" data-role="tagsinput" placeholder="#Musiby..." /> *@
+						<input type="text" name="Tags" asp-for="Tags" class="form-control" data-role="tagsinput" placeholder="#Musiby..." />
+					</div>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button name="btnSubmit" type="submit" class="btn btn-primary" id="btnSubmit" value="Save">
+					Update
+				</button>
+				<a asp-action="Index" class="btn btn-custom m-1">Back</a>
+			</div>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	<script>
+		var deleteFileUrl = '@Url.Action("DeleteFile", "PostManagement")';
+	</script>
+	<link href="~/css/custom/bootstrap-tagsinput.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+	<script src="@Url.Content("~/js/user-bundle.js")"></script>
+	<script src="~/js/custom/postmanagement.js"></script>
+}

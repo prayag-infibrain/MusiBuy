@@ -1,0 +1,179 @@
+﻿@model MusiBuy.Common.Models.InsuranceMasterViewModel
+@using MusiBuy.Common.Common
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    ViewData["Title"] = "Edit Insurance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var readPath = Configuration.GetValue<string>("FilePath:FileReadPath");
+    // var tutorPath = readPath + "/" + GlobalCode.Tour;
+    var routePath = readPath + "/" + GlobalCode.IncuranceDocument;
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Edit Insurance
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form class="form" asp-action="Edit" id="roleFrm" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" value="@Model.Id" />
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="companyName">Product name <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="ProductName" maxlength="100" class="form-control" placeholder="Product name">
+                        <span asp-validation-for="ProductName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-6">
+                    <label for="companyName">Policy number <span class="text-danger">*</span></label>
+                    <input type="text" asp-for="PolicyNumber" maxlength="100" class="form-control" placeholder="Policy number">
+                    <span asp-validation-for="PolicyNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <label asp-for="CatagoryId">Catagory <span class="text-danger">*</span></label>
+                    <select asp-for="CatagoryId" asp-items="Model.Catagorys" class="form-control borderfix ">
+                        <option value="" selected="selected">- Select catagory -</option>
+                    </select>
+                    <span asp-validation-for="CatagoryId" class="text-danger"></span>
+                </div>
+
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="AgencyId">Agency <span class="text-danger">*</span></label>
+                        <select asp-for="AgencyId" asp-items="Model.Agencys" class="form-control borderfix ">
+                            <option value="" selected="selected">- Select agency -</option>
+                        </select>
+                        <span asp-validation-for="AgencyId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="PaymentMode">Payment mode <span class="text-danger">*</span></label>
+                        <select asp-for="PaymentMode" asp-items="Model.PaymentModeEnum" class="form-control borderfix ">
+                            <option value="" selected="selected">- Select Payment mode -</option>
+                        </select>
+                        <span asp-validation-for="PaymentMode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label>Document</label>
+                        <input type="file" asp-for="strDocument" id="document" accept=".pdf" class="form-control" />
+                        <span class="text-danger" asp-validation-for="strDocument" id="fileimgErrorMsg"></span>
+                        <input type="hidden" asp-for="strDocument" name="profile_img_data" runat="server" />
+                        <div class="divViewImage d-flex" id="routeFile">
+                            @if (!string.IsNullOrWhiteSpace(Model.Document))
+                            {
+                                string ImagePath = routePath + Model.Document;
+
+                                <div class="certificate-list pt-1">
+                                    <a href="@ImagePath" class="certificate-item" target="_blank" download="">
+                                        <i class="fas fa-download"></i>
+                                        <span> @Model.Document</span>
+                                    </a>
+                                    <span class="certificate-item certificate-item-close">
+                                        <i class="fas fa-times" onclick="DeleteDocument(@Model.Id)"></i>
+                                    </span>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="companyName">Premium amount <span class="text-danger">*</span></label>
+                        <input type="number" asp-for="PremiumAmount" maxlength="10" class="form-control" placeholder="Premium amount">
+                        <span asp-validation-for="PremiumAmount" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="companyName">Login date<span class="text-danger">*</span></label>
+                        <input type="text" asp-for="strStartDate" id="strStartDate" class="form-control pl-35" placeholder="Login date">
+                        <span asp-validation-for="strStartDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="companyName">Insured name <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="InsuredName" maxlength="100" class="form-control" placeholder="Insured name">
+                        <span asp-validation-for="InsuredName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="companyName">Birthdate <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="strBirthDate" id="strBirthDate" class="form-control pl-35" placeholder="Birthdate">
+                        <span asp-validation-for="strBirthDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="companyName">Renewal date <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="strRenewalDate" id="strRenewalDate" class="form-control pl-35" placeholder="Renewal date">
+                        <span asp-validation-for="strRenewalDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="companyName">WhatsApp number <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="WhatsAppNumber" id="strRenewalDate" class="form-control pl-35" placeholder="WhatsApp number">
+                        <span asp-validation-for="WhatsAppNumber" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="IsActive">Status </label>
+                        <div>
+                            <label>
+                                <input type="radio" asp-for="IsActive" value="true" /> Active
+                            </label>
+                            <label>
+                                <input type="radio" asp-for="IsActive" value="false" /> Inactive
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="roleBtn">
+                    Update
+                </button>
+                <a asp-action="Index" class="btn btn-custom m-1">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/js/custom/InsuranceMaster.js")"></script>
+}

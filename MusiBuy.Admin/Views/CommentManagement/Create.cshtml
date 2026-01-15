@@ -1,0 +1,70 @@
+﻿@model MusiBuy.Common.Models.CommentManagementViewModel
+@using MusiBuy.Common.Common
+@using MusiBuy.Common.Enumeration
+@{
+	ViewData["Title"] = "Add Comment";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolbar" id="kt_toolbar">
+	<div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+		<div class="breadcrumb-header justify-content-between">
+			<div class="left-content">
+				<h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+					Add Comment
+					<small class="text-muted fs-6 fw-normal ms-1"></small>
+				</h1>
+				<partial name="_BreadCrumb" />
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card">
+	<div class="card-body">
+		<form asp-action="Create" method="post" class="form-horizontal formstyle" id="frmUser" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div id="display-messages"></div>
+			<input asp-for="Id" type="hidden" />
+			<input type="hidden" asp-for="Timestamp" id="Timestamp" name="Timestamp" />
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<label asp-for="PostId">Post<span class="text-danger">*</span></label>
+						<select asp-for="PostId" asp-items="Model.SelectPost" class="form-control borderfix">
+							<option value="" selected="selected">- Select Post -</option>
+						</select>
+						<span asp-validation-for="PostId" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+					<div class="form-group">
+						<label asp-for="Comment">Comment </label>
+						<textarea asp-for="Comment" class="form-control" placeholder="Comments..."></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button name="btnSubmit" type="submit" class="btn btn-primary" id="btnSubmit" value="Save">
+					Save
+				</button>
+				<a asp-action="Index" class="btn btn-custom m-1">Back</a>
+			</div>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	<script src="@Url.Content("~/js/user-bundle.js")"></script>
+	<script>
+		const now = new Date();
+		const localDateTime = now.getFullYear() + '-' +
+			String(now.getMonth() + 1).padStart(2, '0') + '-' +
+			String(now.getDate()).padStart(2, '0') + 'T' +
+			String(now.getHours()).padStart(2, '0') + ':' +
+			String(now.getMinutes()).padStart(2, '0') + ':' +
+			String(now.getSeconds()).padStart(2, '0');
+			document.getElementById("Timestamp").value = localDateTime;
+	</script>
+	}

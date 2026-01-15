@@ -1,0 +1,184 @@
+﻿@using MusiBuy.Common.Common
+@model MusiBuy.Common.Models.InsuranceMasterViewModel
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    ViewData["Title"] = "Insurance Master Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var readPath = Configuration.GetValue<string>("FilePath:FileReadPath");
+    // var tutorPath = readPath + "/" + GlobalCode.Tour;
+    var routePath = readPath + "/" + GlobalCode.IncuranceDocument;
+}
+<div class="toolbar" id="kt_toolbar">
+    <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="left-content">
+                <h1 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                    Insurance Master Detail
+                    <small class="text-muted fs-6 fw-normal ms-1"></small>
+                </h1>
+                <partial name="_BreadCrumb" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form class="form-horizontal formstyle">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="ProductName" class="col-sm-12 col-lg-2">Product name :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.ProductName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="CatagoryName" class="col-sm-12 col-lg-2">Catagory name :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.CatagoryName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="InsuredName" class="col-sm-12 col-lg-2">Insured name :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.InsuredName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="AgencyName" class="col-sm-12 col-lg-2">Agency name :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.AgencyName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="PolicyNumber" class="col-sm-12 col-lg-2">Policy number :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.PolicyNumber)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="StartDate" class="col-sm-12 col-lg-2">Login date :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.StartDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="RenewalDate" class="col-sm-12 col-lg-2">Renewal date :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.RenewalDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="strPaymentMode" class="col-sm-12 col-lg-2">Payment mode :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.strPaymentMode)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="PremiumAmount" class="col-sm-12 col-lg-2">Premium amount :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.PremiumAmount)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="WhatsAppNumber" class="col-sm-12 col-lg-2">WhatsApp number :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.WhatsAppNumber)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="BirthDate" class="col-sm-12 col-lg-2">Birthdate :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.BirthDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.Document))
+            {
+                string ImagePath = routePath + Model.Document;
+
+                <div class="row pt-1">
+                    <div class="col-sm-12 col-lg-12">
+                        <div class="row">
+                            <label asp-for="Document" class="col-sm-12 col-lg-2">Document :</label>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="divViewImage d-flex" id="routeFile">
+
+
+                                    <div class="certificate-list pt-1">
+                                        <a href="@ImagePath" class="certificate-item" target="_blank" download="">
+                                            <i class="fas fa-download"></i>
+                                            <span> @Model.Document</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <label asp-for="Active" class="col-sm-12 col-lg-2">Status :</label>
+                        <div class="col-sm-12 col-lg-6">
+                            @Html.DisplayFor(model => model.Active)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-9 col-lg-offset-3">
+                            <a asp-action="Index" class="formgraybtn mtp5 btn btn-custom">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
